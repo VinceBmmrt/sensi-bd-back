@@ -6,7 +6,7 @@ require('dotenv').config();
 // Importation du module debug
 const debug = require('debug')('sensibd:server');
 // Importation du module path
-const path = require('path');
+// const path = require('path');
 // Importation du module express
 const express = require('express');
 
