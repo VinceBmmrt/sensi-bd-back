@@ -10,6 +10,8 @@ const path = require('path');
 // Importation du module express
 const express = require('express');
 
+const router = require('./app/routers');
+
 // Définition du port d'écoute du serveur
 const PORT = process.env.PORT ?? 5000; 
 
@@ -23,6 +25,9 @@ app.use(express.json());
 app.use(express.static('public'));
 // Autorise la réception de données au format (Content-type) x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
+
+// Définition du moteur de rendu
+app.use(router);
 
 // Je lance l'écoute de mon serveur
 app.listen(PORT,()=> debug(`Serveur démarré http://localhost:${PORT}`));
