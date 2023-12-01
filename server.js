@@ -1,7 +1,10 @@
 /***************************************/
 /*** Fichier de lancement du serveur ***/
 /***************************************/
+// Importation du module dotenv
 require('dotenv').config();
+// Importation du module debug
+const debug = require('debug')('sensibd:server');
 // Importation du module path
 const path = require('path');
 // Importation du module express
@@ -22,6 +25,4 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
 // Je lance l'écoute de mon serveur
-app.listen(PORT,()=>{
-  console.log(`Serveur démarré http://localhost:${PORT}`);
-});
+app.listen(PORT,()=> debug(`Serveur démarré http://localhost:${PORT}`));
