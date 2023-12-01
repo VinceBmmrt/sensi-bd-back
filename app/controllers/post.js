@@ -8,9 +8,15 @@ const postController = {
   // Méthode: récupérer tous les posts
   async getAllPosts(_, res) {
     // Récupération de tous les posts
+<<<<<<< HEAD
     const posts = await postDatamapper.findAll();
     // Envoi de la réponse au format JSON
     res.json(posts);
+=======
+    const posts  = await postDatamapper.findAll();  
+    // Envoi de la réponse au format JSON    
+    res.json(posts);      
+>>>>>>> feat: Récupération de toutes les annonces
   },
 };
 
