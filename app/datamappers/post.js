@@ -122,6 +122,15 @@ const postDatamapper = {
     const results = await pool.query(sqlQuery, values);
     return results.rows[0];
   },
+  /**
+   * Méthode: supprimer un post selon son id
+   * @param {number} id - id du post
+   */
+  async delete(id) {
+    const sqlQuery = 'DELETE FROM post WHERE id = $1;';
+    const values = [id];
+    await pool.query(sqlQuery, values);
+  },
 };
 
 module.exports = postDatamapper;

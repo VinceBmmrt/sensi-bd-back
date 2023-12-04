@@ -54,6 +54,13 @@ const postController = {
     // Envoi de la réponse au format JSON
     res.json(post);
   },
+  // Méthode: supprimer un post selon son id
+  async deletePost(req, res) {
+    // Suppression d'un post
+    const post = await postDatamapper.delete(req.params.id);
+    // Envoi de la réponse au format JSON
+    res.json(post);
+  },
 };
 
 // Exportation du controleur des posts

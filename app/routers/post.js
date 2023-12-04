@@ -14,6 +14,7 @@ router.get('/condition/:id', postController.getPostByCondition);
 
 router.post('/', postController.addPost);
 router.put('/:id', postController.updatePost);
+router.delete('/:id', postController.deletePost);
 
 // Exportation du router
 module.exports = router;

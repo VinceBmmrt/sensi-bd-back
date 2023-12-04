@@ -1,5 +1,4 @@
 ### Récupération de toutes les annonces
-
 GET http://localhost:5000/posts
 
 ### Récupération de toutes les annonces par catégorie
@@ -13,7 +12,6 @@ GET http://localhost:5000/posts/condition/1
 
 
 ### Ajout d'une annonce
-
 POST http://localhost:5000/posts
 Content-Type: application/json
 
@@ -31,7 +29,6 @@ Content-Type: application/json
 }
 
 ### Modification d'une annonce par son id
-
 PUT http://localhost:5000/posts/1
 Content-Type: application/json
 
@@ -47,3 +44,6 @@ Content-Type: application/json
     "audience_id": 2,
     "condition_id": 2
 }
+
+### Suppression d'une annonce par son id
+DELETE http://localhost:5000/posts/11
