@@ -25,6 +25,32 @@ const postDatamapper = {
     const results = await pool.query(sqlQuery, values);
     return results.rows;
   },
+  /**
+   * Méthode: créer un post
+   * @param {object} post - post à créer
+   * @returns retourne un post
+   */
+  async add(post) {
+    const sqlQuery = `
+      INSERT INTO post
+        (post_title, slug, description, image, book_title, book_author, user_id, category_id, audience_id, condition_id)
+      VALUES
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      RETURNING *;`;
+    const values = [
+      post.post_title,
+      post.slug,
+      post.description,
+      post.image,
+      post.book_title,
+      post.book_author,
+      post.user_id,
+      post.category_id,
+      post.audience_id,
+      post.condition_id];
+    const results = await pool.query(sqlQuery, values);
+    return results.rows[0];
+  },
 };
 
 module.exports = postDatamapper;
