@@ -19,6 +19,13 @@ const postController = {
     // Envoi de la réponse au format JSON
     res.json(posts);
   },
+  // Méthode: récupérer un post par sa catégorie
+  async getPostByCategory(req, res) {
+    // Récupération de l'id de la catégorie
+    const posts = await postDatamapper.findByCategory(req.params.id);
+    // Envoi de la réponse au format JSON
+    res.json(posts);
+  },
   // Méthode: créer un post
   async addPost(req, res) {
     // Création d'un post

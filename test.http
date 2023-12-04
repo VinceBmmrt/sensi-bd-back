@@ -2,6 +2,9 @@
 
 GET http://localhost:5000/posts
 
+### Récupération de toutes les annonces par catégorie
+GET http://localhost:5000/posts/category/2
+
 
 ### Ajout d'une annonce
 
