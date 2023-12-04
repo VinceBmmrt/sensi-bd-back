@@ -6,7 +6,7 @@ const { postController } = require('../controllers');
 const router = express.Router();
 
 // Définition des routes
-router.get('/annonces', postController.getAllPosts);
+router.get('/', postController.getAllPosts);
 
 // Exportation du router
 module.exports = router;
