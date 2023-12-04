@@ -5,4 +5,8 @@ const { userController } = require('../controllers');
 // Création du router
 const router = express.Router();
 
+// Définition des routes
+router.get('/', userController.getAllUsers);
+
+// Exportation du router
 module.exports = router;
