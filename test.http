@@ -1,6 +1,9 @@
 ### Récupération de toutes les annonces
 GET http://localhost:5000/posts
 
+### Récupération d'une annonce par son id
+GET http://localhost:5000/posts/8
+
 ### Récupération de toutes les annonces par catégorie
 GET http://localhost:5000/posts/category/2
 
