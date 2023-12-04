@@ -1,0 +1,23 @@
+### Récupération de toutes les annonces
+
+GET http://localhost:5000/posts
+
+
+### Ajout d'une annonce
+
+POST http://localhost:5000/posts
+Content-Type: application/json
+
+{
+    "post_title": "Mon annonce",
+    "slug": "mon-annonce",
+    "description": "Ma description",
+    "image": "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
+    "book_title": "Merlin l'enchanteur",
+    "book_author": "Arthur",
+    "user_id": 1,
+    "category_id": 1,
+    "audience_id": 1,
+    "condition_id": 1
+}
+

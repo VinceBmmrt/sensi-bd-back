@@ -19,6 +19,13 @@ const postController = {
     // Envoi de la réponse au format JSON
     res.json(posts);
   },
+  // Méthode: créer un post
+  async addPost(req, res) {
+    // Création d'un post
+    const post = await postDatamapper.add(req.body);
+    // Envoi de la réponse au format JSON
+    res.json(post);
+  },
 };
 
 // Exportation du controleur des posts
