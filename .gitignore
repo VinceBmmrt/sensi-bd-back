@@ -7,6 +7,5 @@ package-lock.json
 
 #config
 .env
-.eslintrc.js
 .editorconfig
 sqitch.conf
