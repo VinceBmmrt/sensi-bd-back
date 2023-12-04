@@ -21,3 +21,20 @@ Content-Type: application/json
     "condition_id": 1
 }
 
+### Modification d'une annonce par son id
+
+PUT http://localhost:5000/posts/1
+Content-Type: application/json
+
+{
+    "post_title": "Mon annonce modifiée",
+    "slug": "mon-annonce-modifiee",
+    "description": "Ma description remodifiée",
+    "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.elle.fr%2FLoisirs%2FLivres%2FNews%2FVoici-le-livre-le-plus-vendu-en-France-en-2022-et-ce-n-est-pas-un-roman-4085975&psig=AOvVaw0XkHiKcIL0H6WUi-LyyygF&ust=1701795406887000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLDxx4eg9oIDFQAAAAAdAAAAABAJ",
+    "book_title": "Merlin Ze enchanteur",
+    "book_author": "Arthur Leroi",
+    "user_id": 2,
+    "category_id": 2,
+    "audience_id": 2,
+    "condition_id": 2
+}

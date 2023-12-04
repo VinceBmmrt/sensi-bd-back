@@ -51,6 +51,44 @@ const postDatamapper = {
     const results = await pool.query(sqlQuery, values);
     return results.rows[0];
   },
+  /**
+   * Méthode: modifier un post selon son id
+   * @param {number} id - id du post
+   * @param {object} post - post à modifier
+   * @returns retourne un post
+   */
+  async update(id, post) {
+    const sqlQuery = `
+      UPDATE post
+      SET
+        post_title = $1,
+        slug = $2,
+        description = $3,
+        image = $4,
+        book_title = $5,
+        book_author = $6,
+        user_id = $7,
+        category_id = $8,
+        audience_id = $9,
+        condition_id = $10,
+        updated_at = NOW()
+      WHERE id = $11
+      RETURNING *;`;
+    const values = [
+      post.post_title,
+      post.slug,
+      post.description,
+      post.image,
+      post.book_title,
+      post.book_author,
+      post.user_id,
+      post.category_id,
+      post.audience_id,
+      post.condition_id,
+      id];
+    const results = await pool.query(sqlQuery, values);
+    return results.rows[0];
+  },
 };
 
 module.exports = postDatamapper;

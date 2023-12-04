@@ -26,6 +26,13 @@ const postController = {
     // Envoi de la réponse au format JSON
     res.json(post);
   },
+  // Méthode: modifier un post selon son id
+  async updatePost(req, res) {
+    // Modification d'un post
+    const post = await postDatamapper.update(req.params.id, req.body);
+    // Envoi de la réponse au format JSON
+    res.json(post);
+  },
 };
 
 // Exportation du controleur des posts

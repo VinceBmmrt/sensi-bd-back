@@ -10,6 +10,7 @@ router.get('/', postController.getAllPosts);
 router.get('/:id', postController.getPostById);
 
 router.post('/', postController.addPost);
+router.put('/:id', postController.updatePost);
 
 // Exportation du router
 module.exports = router;
