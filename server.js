@@ -1,6 +1,6 @@
-/***************************************/
-/*** Fichier de lancement du serveur ***/
-/***************************************/
+/** ************************************ */
+/** * Fichier de lancement du serveur ** */
+/** ************************************ */
 // Importation du module dotenv
 require('dotenv').config();
 // Importation du module debug
@@ -13,7 +13,7 @@ const express = require('express');
 const router = require('./app/routers');
 
 // Définition du port d'écoute du serveur
-const PORT = process.env.PORT ?? 5000; 
+const PORT = process.env.PORT ?? 5000;
 
 // Création de l'application express
 const app = express();
@@ -30,4 +30,4 @@ app.use(express.urlencoded({ extended: true }));
 app.use(router);
 
 // Je lance l'écoute de mon serveur
-app.listen(PORT,()=> debug(`Serveur démarré http://localhost:${PORT}`));
+app.listen(PORT, () => debug(`Serveur démarré http://localhost:${PORT}`));
