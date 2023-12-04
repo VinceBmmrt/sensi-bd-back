@@ -8,6 +8,9 @@ GET http://localhost:5000/posts/category/2
 ### Récupération de toutes les annonces par audience
 GET http://localhost:5000/posts/audience/2
 
+### Récupération de toutes les annonces par condition
+GET http://localhost:5000/posts/condition/1
+
 
 ### Ajout d'une annonce
 

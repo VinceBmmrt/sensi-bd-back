@@ -33,6 +33,13 @@ const postController = {
     // Envoi de la réponse au format JSON
     res.json(posts);
   },
+  // Méthode: récupérer tous les posts par condition
+  async getPostByCondition(req, res) {
+    // Récupération de l'id de la condition
+    const posts = await postDatamapper.findByCondition(req.params.id);
+    // Envoi de la réponse au format JSON
+    res.json(posts);
+  },
   // Méthode: créer un post
   async addPost(req, res) {
     // Création d'un post

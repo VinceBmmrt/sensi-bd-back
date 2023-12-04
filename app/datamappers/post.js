@@ -48,6 +48,17 @@ const postDatamapper = {
     return results.rows;
   },
   /**
+   * Méthode: récupérer tous les posts par condition
+   * @param {number} id - id de la condition
+   * @returns retourne tous les posts
+   */
+  async findByCondition(id) {
+    const sqlQuery = 'SELECT * FROM post WHERE condition_id = $1';
+    const values = [id];
+    const results = await pool.query(sqlQuery, values);
+    return results.rows;
+  },
+  /**
    * Méthode: créer un post
    * @param {object} post - post à créer
    * @returns retourne un post
