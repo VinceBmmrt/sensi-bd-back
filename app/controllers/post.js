@@ -26,6 +26,13 @@ const postController = {
     // Envoi de la réponse au format JSON
     res.json(posts);
   },
+  // Méthode: récupérer tous les posts par audience
+  async getPostByAudience(req, res) {
+    // Récupération de l'id de l'audience
+    const posts = await postDatamapper.findByAudience(req.params.id);
+    // Envoi de la réponse au format JSON
+    res.json(posts);
+  },
   // Méthode: créer un post
   async addPost(req, res) {
     // Création d'un post

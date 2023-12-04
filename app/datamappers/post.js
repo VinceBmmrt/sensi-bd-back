@@ -37,6 +37,17 @@ const postDatamapper = {
     return results.rows;
   },
   /**
+   * Méthode: récupérer tous les posts par audience
+   * @param {number} id - id de l'audience
+   * @returns retourne tous les posts
+   */
+  async findByAudience(id) {
+    const sqlQuery = 'SELECT * FROM post WHERE audience_id = $1';
+    const values = [id];
+    const results = await pool.query(sqlQuery, values);
+    return results.rows;
+  },
+  /**
    * Méthode: créer un post
    * @param {object} post - post à créer
    * @returns retourne un post

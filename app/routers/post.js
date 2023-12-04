@@ -9,6 +9,7 @@ const router = express.Router();
 router.get('/', postController.getAllPosts);
 router.get('/:id', postController.getPostById);
 router.get('/category/:id', postController.getPostByCategory);
+router.get('/audience/:id', postController.getPostByAudience);
 
 router.post('/', postController.addPost);
 router.put('/:id', postController.updatePost);
