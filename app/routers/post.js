@@ -7,6 +7,7 @@ const router = express.Router();
 
 // Définition des routes
 router.get('/', postController.getAllPosts);
+router.get('/:id', postController.getPostById);
 
 // Exportation du router
 module.exports = router;
