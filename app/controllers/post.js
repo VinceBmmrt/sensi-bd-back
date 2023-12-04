@@ -12,6 +12,13 @@ const postController = {
     // Envoi de la réponse au format JSON
     res.json(posts);
   },
+  // Méthode: récupérer un post par son id
+  async getPostById(req, res) {
+    // Récupération de l'id du post
+    const posts = await postDatamapper.findById(req.params.id);
+    // Envoi de la réponse au format JSON
+    res.json(posts);
+  },
 };
 
 // Exportation du controleur des posts

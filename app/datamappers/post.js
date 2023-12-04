@@ -14,6 +14,17 @@ const postDatamapper = {
     const results = await pool.query(sqlQuery);
     return results.rows;
   },
+  /**
+   * Méthode: récupérer un post par son id
+   * @param {number} id - id du post
+   * @returns retourne un post
+   */
+  async findById(id) {
+    const sqlQuery = 'SELECT * FROM post WHERE id = $1';
+    const values = [id];
+    const results = await pool.query(sqlQuery, values);
+    return results.rows;
+  },
 };
 
 module.exports = postDatamapper;
