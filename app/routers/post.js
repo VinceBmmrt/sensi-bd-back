@@ -1,7 +1,7 @@
-// Importation du controleur postController
-const express = require('express');
-const { postController } = require('../controllers');
 // Importation du module express
+const express = require('express');
+// Importation du controleur postController
+const { postController } = require('../controllers');
 // Création du router
 const router = express.Router();
 
