@@ -13,11 +13,19 @@ const userController = {
     res.json(users);
   },
   // Méthode: récupérer un utilisateur
-  async getUserById(_, res) {
+  async getUserById(req, res) {
     // Récupération d'un utilisateur
-    const user = await userDatamapper.findById();
+    const user = await userDatamapper.findById(req.params.id);
     // Envoi de la réponse au format JSON
     res.json(user);
+  },
+  // Méthode: Ajout d'un utilisateur
+  async addUser(req, res) {
+    // Envoi d'un utilisateur
+    const addressId = await userDatamapper.addUserAddress(req.body);
+    const newUser = await userDatamapper.addNewUser(req.body, addressId);
+    // Envoi du body en format JSON
+    res.json(newUser);
   },
 };
 

@@ -10,19 +10,59 @@ const userDatamapper = {
    * @returns retourne tout les posts
    */
   async findAll() {
-    const sqlQuery = 'SELECT * FROM user';
+    const sqlQuery = 'SELECT * FROM "user"';
     const results = await pool.query(sqlQuery);
     return results.rows;
   },
   /**
    * Méthode: récupérer un utilisateur de la BDD par son ID
+   * @param {number} id id de l'utilisateur
    * @returns retourne un utilisateur
    */
   async findById(id) {
-    const sqlQuery = 'SELECT * FROM post WHERE id = $1';
+    const sqlQuery = 'SELECT * FROM "user" WHERE id = $1';
     const values = [id];
     const results = await pool.query(sqlQuery, values);
     return results.rows;
+  },
+  async addUserAddress(addressObj) {
+    const values = [
+      addressObj.full_address,
+      addressObj.number,
+      addressObj.street,
+      addressObj.zipcode,
+      addressObj.city,
+      addressObj.country,
+      addressObj.latitude,
+      addressObj.longitude,
+    ];
+    const sqlQuery = `
+    INSERT INTO "address"
+      ("full_address", "number", "street", "zipcode", "city", "country", "latitude", "longitude")
+    VALUES
+      ($1, $2, $3, $4, $5, $6, $7, $8)
+    RETURNING id;`;
+    const results = await pool.query(sqlQuery, values);
+    return results.rows[0].id;
+  },
+  async addNewUser(userObj, addressId) {
+    const values = [
+      userObj.firstname,
+      userObj.lastname,
+      userObj.pseudonym,
+      userObj.email,
+      userObj.avatar,
+      userObj.password,
+      addressId,
+    ];
+    const sqlQuery = `
+      INSERT INTO "user"
+        ("firstname", "lastname","pseudonym","email", "avatar", "password","address_id")
+      VALUES
+        ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING *;`;
+    const results = await pool.query(sqlQuery, values);
+    return results.rows[0];
   },
 };
 

@@ -7,6 +7,8 @@ const router = express.Router();
 
 // Définition des routes
 router.get('/', userController.getAllUsers);
+router.get('/:id', userController.getUserById);
+router.post('/', userController.addUser);
 
 // Exportation du router
 module.exports = router;
