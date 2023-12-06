@@ -1,8 +1,8 @@
+const debug = require('debug')('sensibd:user-datamapper');
 // Importe l'instance du pool de connexions à la base de données depuis le fichier 'pool.js' local.
 // Ce pool est utilisé pour gérer et optimiser les connexions à la base de données,
 // facilitant les requêtes et les transactions dans le DataMapper.
 const pool = require('./pool');
-const debug = require('debug')('sensibd:user-datamapper');
 
 // Initialisation à la connexion à la base de données
 const userDatamapper = {
