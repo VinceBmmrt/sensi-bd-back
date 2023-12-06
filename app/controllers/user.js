@@ -1,7 +1,7 @@
 // Importation du postDatamapper
 const { userDatamapper } = require('../datamappers');
 // Importation du module debug
-// const debug = require('debug')('controller:post');
+const debug = require('debug')('sensibd:user-controller');
 
 // Objet: regroupe tous les controleurs des posts
 const userController = {
@@ -27,13 +27,23 @@ const userController = {
     // Envoi du body en format JSON
     res.json(newUser);
   },
+  // Méthode de mise à jour des info d'un utilisateur
   async updateUser(req, res) {
     const user = await userDatamapper.update(req.params.id, req.body);
     res.json(user);
   },
+  // Méthode de suppression d'un utilisateur
   async deleteUser(req, res) {
     const user = await userDatamapper.delete(req.params.id);
     res.json(user);
+  },
+  // Méthode de mise à jour des info de l'adresse d'un utilisateur
+  async updateUserAddress(req, res) {
+    debug('req.body:', req.body);
+    const userAddressId = await userDatamapper.findAddressId(req.params.id);
+    debug('User Address ID:', userAddressId);
+    const newUserAddress = await userDatamapper.updateAddress(userAddressId, req.body);
+    res.json(newUserAddress);
   },
 };
 
