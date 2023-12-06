@@ -89,6 +89,11 @@ const userDatamapper = {
     const results = await pool.query(sqlQuery, values);
     return results.rows;
   },
+  async delete(id) {
+    const sqlQuery = 'DELETE FROM "user" WHERE id = $1;';
+    const values = [id];
+    await pool.query(sqlQuery, values);
+  },
 };
 
 module.exports = userDatamapper;
