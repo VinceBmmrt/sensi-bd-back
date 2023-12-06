@@ -2,6 +2,7 @@
 // Ce pool est utilisé pour gérer et optimiser les connexions à la base de données,
 // facilitant les requêtes et les transactions dans le DataMapper.
 const pool = require('./pool');
+const debug = require('debug')('sensibd:user-datamapper');
 
 // Initialisation à la connexion à la base de données
 const userDatamapper = {
@@ -25,6 +26,11 @@ const userDatamapper = {
     const results = await pool.query(sqlQuery, values);
     return results.rows;
   },
+  /**
+   * Méthode ajouter l'adresse d'un utilisateur
+   * @param {object} addressObj les infos de l'adresse de l'utilisateur
+   * @returns retourne l'id de l'adresse ajouté
+   */
   async addUserAddress(addressObj) {
     const values = [
       addressObj.full_address,
@@ -45,6 +51,12 @@ const userDatamapper = {
     const results = await pool.query(sqlQuery, values);
     return results.rows[0].id;
   },
+  /**
+   * Méthode d'ajout d'un utilisateur
+   * @param {object} userObj les infos de l'utilisateur
+   * @param {id} addressId l'id de l'adresse de l'utilisateur ajouté précédement
+   * @returns retourne les infos de l'utilisateur
+   */
   async addNewUser(userObj, addressId) {
     const values = [
       userObj.firstname,
@@ -60,6 +72,93 @@ const userDatamapper = {
         ("firstname", "lastname","pseudonym","email", "avatar", "password","address_id")
       VALUES
         ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING *;`;
+    const results = await pool.query(sqlQuery, values);
+    return results.rows[0];
+  },
+  /**
+   * Méthode pour mettre à jour les infos d'un utilisateur
+   * @param {id} id id de l'utilisateur
+   * @param {object} userObj infos à mettre à jour pour l'utilisateur
+   * @returns retourne les infos de l'utilisateur
+   */
+  async update(id, userObj) {
+    const values = [
+      userObj.firstname,
+      userObj.lastname,
+      userObj.pseudonym,
+      userObj.email,
+      userObj.avatar,
+      userObj.password,
+      id,
+    ];
+    const sqlQuery = `
+    UPDATE "user"
+    SET
+      "firstname" = $1,
+      "lastname" = $2,
+      "pseudonym" = $3,
+      "email" = $4,
+      "avatar" = $5,
+      "password" = $6,
+      "updated_at" = now()
+    WHERE "id" = $7
+    RETURNING *;`;
+    const results = await pool.query(sqlQuery, values);
+    return results.rows;
+  },
+  /**
+   * Méthode de suppression d'un utilisateur
+   * @param {id} id id de l'utilisateur
+   */
+  async delete(id) {
+    const sqlQuery = 'DELETE FROM "user" WHERE id = $1;';
+    const values = [id];
+    await pool.query(sqlQuery, values);
+  },
+  /**
+   * Méthode de récupération de l'id de l'adresse de l'utilisateur
+   * @param {*} userId id de l'utilisateur
+   * @returns retourne l'id de l'adresse de l'utilisateur
+   */
+  async findAddressId(userId) {
+    const sqlQuery = 'SELECT address_id FROM "user" WHERE id = $1';
+    const values = [userId];
+    const results = await pool.query(sqlQuery, values);
+    return results.rows[0].address_id;
+  },
+  /**
+   * Méthode de mise à jour de l'adresse d'un utilisateur
+   * @param {id} userAddressId id de l'adresse de l'utilisateur
+   * @param {object} userAddressObj info de l'adresse de l'utilisateur
+   * @returns retourne de l'info de l'adresse de l'utilisateur
+   */
+  async updateAddress(userAddressId, userAddressObj) {
+    const values = [
+      userAddressObj.full_address,
+      userAddressObj.number,
+      userAddressObj.street,
+      userAddressObj.zipcode,
+      userAddressObj.city,
+      userAddressObj.country,
+      userAddressObj.latitude,
+      userAddressObj.longitude,
+      userAddressId,
+    ];
+    debug('values for sql update', values);
+    const sqlQuery = `
+      UPDATE "address"
+      SET
+        full_address = $1,
+        number = $2,
+        street = $3,
+        zipcode = $4,
+        city = $5,
+        country = $6,
+        latitude = $7,
+        longitude = $8,
+        updated_at = now()
+      WHERE id = $9
       RETURNING *;`;
     const results = await pool.query(sqlQuery, values);
     return results.rows[0];
