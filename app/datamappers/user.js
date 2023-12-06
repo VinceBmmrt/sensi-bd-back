@@ -64,6 +64,31 @@ const userDatamapper = {
     const results = await pool.query(sqlQuery, values);
     return results.rows[0];
   },
+  async update(id, user) {
+    const values = [
+      user.firstname,
+      user.lastname,
+      user.pseudonym,
+      user.email,
+      user.avatar,
+      user.password,
+      id,
+    ];
+    const sqlQuery = `
+    UPDATE "user"
+    SET
+      "firstname" = $1,
+      "lastname" = $2,
+      "pseudonym" = $3,
+      "email" = $4,
+      "avatar" = $5,
+      "password" = $6,
+      "updated_at" = now()
+    WHERE "id" = $7
+    RETURNING *;`;
+    const results = await pool.query(sqlQuery, values);
+    return results.rows;
+  },
 };
 
 module.exports = userDatamapper;

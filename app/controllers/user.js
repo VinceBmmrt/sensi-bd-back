@@ -27,6 +27,14 @@ const userController = {
     // Envoi du body en format JSON
     res.json(newUser);
   },
+  async updateUser(req, res) {
+    const user = await userDatamapper.update(req.params.id, req.body);
+    res.json(user);
+  },
+  async deleteUser(req, res) {
+    const user = await userDatamapper.delete(req.params.id);
+    res.json(user);
+  },
 };
 
 // Exportation du controleur des posts
