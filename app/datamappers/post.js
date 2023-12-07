@@ -10,7 +10,9 @@ const postDatamapper = {
    * @returns retourne tout les posts
    */
   async findAll() {
-    const sqlQuery = 'SELECT * FROM post';
+    const sqlQuery = `SELECT *
+                      FROM "post"
+                      JOIN "user" ON "user"."id" = "post"."user_id";`;
     const results = await pool.query(sqlQuery);
     return results.rows;
   },
@@ -20,7 +22,16 @@ const postDatamapper = {
    * @returns retourne un post
    */
   async findById(id) {
-    const sqlQuery = 'SELECT * FROM post WHERE id = $1';
+    const sqlQuery = `SELECT
+                        "post".*,
+                        "user"."address_id",
+                        "user"."firstname",
+                        "user"."lastname",
+                        "user"."pseudonym",
+                        "user"."avatar"
+                      FROM "post"
+                      JOIN "user" ON "user"."id" = "post"."user_id"
+                      WHERE "post"."id" = $1`;
     const values = [id];
     const results = await pool.query(sqlQuery, values);
     return results.rows;
