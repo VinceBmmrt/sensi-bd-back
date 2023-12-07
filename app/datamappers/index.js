@@ -4,7 +4,8 @@
 // Importation du module pool
 const postDatamapper = require('./post');
 const userDatamapper = require('./user');
+const categoryDatamapper = require('./category');
 
 module.exports = {
-  postDatamapper, userDatamapper,
+  postDatamapper, userDatamapper, categoryDatamapper,
 };
