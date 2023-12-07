@@ -15,7 +15,15 @@ const postDatamapper = {
     const offset = (pageNum - 1) * pageSize; // Calcul du décalage basé sur la page demandée
 
     const sqlQuery = `
-      SELECT * FROM post
+      SELECT
+        "post".*,
+        "user"."address_id",
+        "user"."firstname",
+        "user"."lastname",
+        "user"."pseudonym",
+        "user"."avatar"
+      FROM "post"
+      JOIN "user" ON "user"."id" = "post"."user_id"
       ORDER BY id ASC
       LIMIT $1 OFFSET $2;
     `;

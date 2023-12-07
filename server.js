@@ -1,6 +1,8 @@
 /** ************************************ */
 /** * Fichier de lancement du serveur ** */
 /** ************************************ */
+// Importation du module CORS
+const cors = require('cors');
 // Importation du module dotenv
 require('dotenv').config();
 // Importation du module debug
@@ -35,6 +37,9 @@ const app = express();
 
 // Autorise la réception de données au format (Content-type) JSON
 app.use(express.json());
+
+// Autorise les requêtes cross-origin
+app.use(cors(''));
 
 // Route GET pour servir les images stockées sur S3.
 // Utilise la clé fournie pour récupérer et renvoyer l'image
