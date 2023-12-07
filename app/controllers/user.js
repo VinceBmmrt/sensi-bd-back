@@ -1,7 +1,7 @@
-// Importation du postDatamapper
-const { userDatamapper } = require('../datamappers');
 // Importation du module debug
 const debug = require('debug')('sensibd:user-controller');
+// Importation du postDatamapper
+const { userDatamapper } = require('../datamappers');
 
 // Objet: regroupe tous les controleurs des posts
 const userController = {
