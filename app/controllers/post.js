@@ -5,12 +5,21 @@ const { postDatamapper } = require('../datamappers');
 
 // Objet: regroupe tous les controleurs des posts
 const postController = {
-  // Méthode: récupérer tous les posts
-  async getAllPosts(_, res) {
-    // Récupération de tous les posts
-    const posts = await postDatamapper.findAll();
-    // Envoi de la réponse au format JSON
-    res.json(posts);
+  // Méthode: récupérer tous les posts avec pagination
+  async getAllPosts(req, res) {
+  /* Récupération du numéro de page à partir des paramètres de requête,
+  avec une valeur par défaut de 1 */
+    const page = req.query.page || 1;
+
+    try {
+    // Appel de findAll avec le numéro de page pour obtenir les posts paginés
+      const posts = await postDatamapper.findAll(page);
+      // Envoi de la réponse au format JSON avec les posts
+      res.json(posts);
+    } catch (error) {
+    // Gestion des erreurs
+      res.status(500).json({ error: error.message });
+    }
   },
   // Méthode: récupérer un post par son id
   async getPostById(req, res) {
