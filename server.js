@@ -17,6 +17,7 @@ const unlinkFile = util.promisify(f3.unlink);
 
 /* Importation du module multer pour la gestion
 des fichiers entrants dans les requêtes HTTP */
+// eslint-disable-next-line import/no-extraneous-dependencies
 const multer = require('multer');
 /* Création d'une instance multer, configurée pour stocker
 les fichiers téléchargés dans le dossier 'uploads/' */
