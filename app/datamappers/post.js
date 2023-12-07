@@ -9,11 +9,18 @@ const postDatamapper = {
    * Méthode: récupérer tous les posts de la base de données
    * @returns retourne tout les posts
    */
-  async findAll() {
-    const sqlQuery = `SELECT *
-                      FROM "post"
-                      JOIN "user" ON "user"."id" = "post"."user_id";`;
-    const results = await pool.query(sqlQuery);
+  async findAll(page = 1) {
+    const pageSize = 10; // Nombre fixe de posts par page défini à 10
+    const pageNum = parseInt(page, 10);
+    const offset = (pageNum - 1) * pageSize; // Calcul du décalage basé sur la page demandée
+
+    const sqlQuery = `
+      SELECT * FROM post
+      ORDER BY id ASC
+      LIMIT $1 OFFSET $2;
+    `;
+    const values = [pageSize, offset];
+    const results = await pool.query(sqlQuery, values);
     return results.rows;
   },
   /**
