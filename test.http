@@ -59,3 +59,26 @@ GET http://localhost:5000/categories/3
 
 ### Récupération de toutes les audiences
 GET http://localhost:5000/audiences
+
+### Ajout d'un utilisateur
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "address": "4 Bd de Strasbourg, 75010 Paris, France",
+    "city": "Paris",
+    "confirmPassword": "Azerty123!",
+    "country": "France",
+    "email": "li@gmail.com",
+    "error": false,
+    "firstname": "li",
+    "lastname": "xi",
+    "latitude": 48.8698223,
+    "longitude": 2.3550348,
+    "number": "4",
+    "password": "Azerty123!",
+    "pseudonym": "lixi",
+    "street": "Bd de Strasbourg",
+    "zipcode": "75010"
+
+}

@@ -33,7 +33,7 @@ const userDatamapper = {
    */
   async addUserAddress(addressObj) {
     const values = [
-      addressObj.full_address,
+      addressObj.address,
       addressObj.number,
       addressObj.street,
       addressObj.zipcode,
@@ -44,7 +44,7 @@ const userDatamapper = {
     ];
     const sqlQuery = `
     INSERT INTO "address"
-      ("full_address", "number", "street", "zipcode", "city", "country", "latitude", "longitude")
+      ("address", "number", "street", "zipcode", "city", "country", "latitude", "longitude")
     VALUES
       ($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING id;`;
@@ -135,7 +135,7 @@ const userDatamapper = {
    */
   async updateAddress(userAddressId, userAddressObj) {
     const values = [
-      userAddressObj.full_address,
+      userAddressObj.address,
       userAddressObj.number,
       userAddressObj.street,
       userAddressObj.zipcode,
@@ -149,7 +149,7 @@ const userDatamapper = {
     const sqlQuery = `
       UPDATE "address"
       SET
-        full_address = $1,
+        address = $1,
         number = $2,
         street = $3,
         zipcode = $4,

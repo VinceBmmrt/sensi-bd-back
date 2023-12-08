@@ -4,7 +4,7 @@ BEGIN;
 INSERT INTO "role" ("name") VALUES ('membre'), ('admin'), ('bloqué');
 
 -- Insertion de données pour les adresses
-INSERT INTO "address" ("full_address", "number", "street", "zipcode", "city", "country", "latitude", "longitude") VALUES
+INSERT INTO "address" ("address", "number", "street", "zipcode", "city", "country", "latitude", "longitude") VALUES
 ('123 Rue de la Paix, 75000 Paris', '123', 'Rue de la Paix', '75000', 'Paris', 'France', 48.8566, 2.3522),
 ('456 Avenue de la Liberté, 33000 Bordeaux', '456', 'Avenue de la Liberté', '33000', 'Bordeaux', 'France', 44.8378, -0.5795),
 ('789 Boulevard du Midi, 13000 Marseille', '789', 'Boulevard du Midi', '13000', 'Marseille', 'France', 43.2965, 5.3698);
