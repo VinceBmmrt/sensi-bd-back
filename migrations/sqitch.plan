@@ -4,3 +4,4 @@
 01-init 2023-11-30T15:17:27Z Julien Serbielle <julien.serbielle@oclock.school> # Initialisation de la BDD
 02-default-fk 2023-12-05T08:26:37Z Julien Serbielle <julien.serbielle@oclock.school> # ajout de contrainte DEFAULT sur user.role_id
 03-change-float 2023-12-07T09:10:49Z Julien Serbielle <julien.serbielle@oclock.school> # changement du type de adresse.latitude et adresse.longitude
+04-change-name 2023-12-08T15:28:35Z Julien Serbielle <julien.serbielle@oclock.school> # changement du nomdu champ full_address de la table address
