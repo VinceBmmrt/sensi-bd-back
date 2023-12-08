@@ -50,3 +50,6 @@ Content-Type: application/json
 
 ### Suppression d'une annonce par son id
 DELETE http://localhost:5000/posts/11
+
+### Récupération de toutes les catégories
+GET http://localhost:5000/categories

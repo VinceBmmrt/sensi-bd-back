@@ -4,6 +4,16 @@
 const pool = require('./pool');
 
 // Initialisation à la connexion à la base de données
-const categoryDatamapper = {};
+const categoryDatamapper = {
+  /**
+   * Méthode: récupérer toutes les catégories de la base de données
+   * @returns retourne tout les catégories
+   */
+  async findAll() {
+    const sqlQuery = 'SELECT * FROM "category"';
+    const results = await pool.query(sqlQuery);
+    return results.rows;
+  },
+};
 
 module.exports = categoryDatamapper;
