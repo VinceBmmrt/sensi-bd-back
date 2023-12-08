@@ -10,6 +10,12 @@ const categoryController = {
     // Envoi de la réponse au format JSON avec les categories
     res.json(categories);
   },
+  async getCategoryById(req, res) {
+    // Récupération de l'id de la categorie
+    const categories = await categoryDatamapper.findById(req.params.id);
+    // Envoi de la réponse au format JSON
+    res.json(categories);
+  },
 };
 
 // Exportation du controleur des categories

@@ -14,6 +14,17 @@ const categoryDatamapper = {
     const results = await pool.query(sqlQuery);
     return results.rows;
   },
+  /**
+   * Méthode: récupérer une catégorie de la BDD par son ID
+   * @param {number} id id de la catégorie
+   * @returns retourne une catégorie
+   */
+  async findById(id) {
+    const sqlQuery = 'SELECT * FROM "category" WHERE id = $1';
+    const values = [id];
+    const results = await pool.query(sqlQuery, values);
+    return results.rows;
+  },
 };
 
 module.exports = categoryDatamapper;

@@ -53,3 +53,6 @@ DELETE http://localhost:5000/posts/11
 
 ### Récupération de toutes les catégories
 GET http://localhost:5000/categories
+
+### Récupération d'une catégorie par son id
+GET http://localhost:5000/categories/3
