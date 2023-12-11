@@ -64,6 +64,7 @@ const userController = {
 
     // 3. Avant l'ajout du mdp en bdd, hashage du MdP
     const encryptedPassword = bcrypt.hashSync(body.password, 10);
+    debug('Mot de Passe hashé:', encryptedPassword);
 
     const userData = {
       firstname: body.firstname,
