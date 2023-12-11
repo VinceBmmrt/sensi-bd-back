@@ -85,4 +85,4 @@ Content-Type: application/json
 
 ### Récupération d'un utilisateur et des annonces associées
 
-GET http://localhost:5000/users/9
+GET http://localhost:5000/users/4
