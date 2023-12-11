@@ -10,6 +10,13 @@ const conditionController = {
     // Envoi de la réponse au format JSON avec les conditions
     res.json(conditions);
   },
+  // Méthode pour récupérer une condition par son id
+  async getConditionById(req, res) {
+    // Récupération de l'id de la condition
+    const conditions = await conditionDatamapper.findById(req.params.id);
+    // Envoi de la réponse au format JSON
+    res.json(conditions);
+  },
 };
 
 // Exportation du controleur des conditions

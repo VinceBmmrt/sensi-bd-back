@@ -7,6 +7,7 @@ const router = express.Router();
 
 // Définition des routes
 router.get('/', conditionController.getAllConditions);
+router.get('/:id', conditionController.getConditionById);
 
 // Exportation du router
 module.exports = router;
