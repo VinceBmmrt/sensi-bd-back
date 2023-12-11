@@ -6,7 +6,8 @@ const postDatamapper = require('./post');
 const userDatamapper = require('./user');
 const categoryDatamapper = require('./category');
 const audienceDatamapper = require('./audience');
+const conditionDatamapper = require('./condition');
 
 module.exports = {
-  postDatamapper, userDatamapper, categoryDatamapper, audienceDatamapper,
+  postDatamapper, userDatamapper, categoryDatamapper, audienceDatamapper, conditionDatamapper,
 };

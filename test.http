@@ -83,6 +83,9 @@ Content-Type: application/json
 
 }
 
+### Récupération de toutes les conditions
+GET http://localhost:5000/conditions
+
 ### Récupération d'un utilisateur et des annonces associées
 
 GET http://localhost:5000/users/9
