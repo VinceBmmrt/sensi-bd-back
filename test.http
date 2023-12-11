@@ -82,3 +82,7 @@ Content-Type: application/json
     "zipcode": "75010"
 
 }
+
+### Récupération d'un utilisateur et des annonces associées
+
+GET http://localhost:5000/users/9
