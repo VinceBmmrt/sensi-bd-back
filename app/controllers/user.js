@@ -1,5 +1,9 @@
 // Importation du module debug
 const debug = require('debug')('sensibd:user-controller');
+// Importation du validateur d'email
+const validator = require('email-validator');
+// Importation de bcrypt pour le hachage de MdP
+const bcrypt = require('bcrypt');
 // Importation du postDatamapper
 const { userDatamapper } = require('../datamappers');
 
@@ -21,9 +25,58 @@ const userController = {
   },
   // Méthode: Ajout d'un utilisateur
   async addUser(req, res) {
+    // 1. Récupération des données du form
+    const { body } = req;
+
+    // 2. Vérification + hachage du MdP
+    // - a. Vérification de la présence des infos
+    if (!body.firstname || !body.lastname || !body.pseudonym || !body.email || !body.password) {
+      res.json({
+        success: false,
+        error: "Toutes les informations nécessaires n'ont pas été transmises.",
+      });
+    }
+
+    // - b. Vérification du format de l'email
+    if (!validator.validate(body.email)) {
+      res.json({
+        success: false,
+        error: "Cet email n'est pas valide.",
+      });
+    }
+
+    // - c. Vérification de la présence de l'email en bdd
+    const doesUserExist = await userDatamapper.checkUserExists(body.email);
+    if (doesUserExist) {
+      res.json({
+        succes: false,
+        error: "Cet email n'est pas disponible.",
+      });
+    }
+
+    // - d. Vérification si le mdp et sa confirmation sont identique
+    if (body.password !== body.confirmPassword) {
+      res.json({
+        success: false,
+        error: 'Le mot de passe et la confirmation ne correspondent pas.',
+      });
+    }
+
+    // 3. Avant l'ajout du mdp en bdd, hashage du MdP
+    const encryptedPassword = bcrypt.hashSync(body.password, 10);
+
+    const userData = {
+      firstname: body.firstname,
+      lastname: body.lastname,
+      pseudonym: body.pseudonym,
+      email: body.email,
+      avatar: body.avatar,
+      password: encryptedPassword,
+    };
+
     // Envoi d'un utilisateur
     const addressId = await userDatamapper.addUserAddress(req.body);
-    const newUser = await userDatamapper.addNewUser(req.body, addressId);
+    const newUser = await userDatamapper.addNewUser(userData, addressId);
     // Envoi du body en format JSON
     res.json(newUser);
   },

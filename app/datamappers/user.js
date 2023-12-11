@@ -189,6 +189,15 @@ const userDatamapper = {
     const results = await pool.query(sqlQuery, values);
     return results.rows[0];
   },
+  async checkUserExists(email) {
+    const sqlQuery = 'SELECT * FROM "user" WHERE email = $1 LIMIT 1';
+    const values = [email];
+    const results = await pool.query(sqlQuery, values);
+    if (results.rows.length > 0) {
+      return true;
+    }
+    return false;
+  },
 };
 
 module.exports = userDatamapper;
