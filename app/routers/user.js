@@ -8,6 +8,8 @@ const controllerHandler = require('../controllers/helpers/controllerHandler');
 const ApiError = require('../errors/ApiError');
 // Importation de errorHandler
 const errorHandler = require('../controllers/helpers/errorHandler');
+// Import du middleware JWT
+const auth = require('../utils/authToken');
 
 // Création du router
 const router = express.Router();
@@ -17,10 +19,10 @@ router.get('/', controllerHandler(userController.getAllUsers));
 router.get('/:id', controllerHandler(userController.getUserById));
 router.post('/', controllerHandler(userController.addUser));
 
-router.patch('/:id', controllerHandler(userController.updateUser));
-router.delete('/:id', controllerHandler(userController.deleteUser));
+router.patch('/:id', auth, controllerHandler(userController.updateUser));
+router.delete('/:id', auth, controllerHandler(userController.deleteUser));
 
-router.patch('/:id/address', controllerHandler(userController.updateUserAddress));
+router.patch('/:id/address', auth, controllerHandler(userController.updateUserAddress));
 
 // Middleware pour gérer les routes qui ne correspondent à aucune route définie ci-dessus.
 router.use(() => {

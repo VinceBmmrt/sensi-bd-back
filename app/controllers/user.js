@@ -4,6 +4,8 @@ const debug = require('debug')('sensibd:user-controller');
 const validator = require('email-validator');
 // Importation de bcrypt pour le hachage de MdP
 const bcrypt = require('bcrypt');
+// Importation de JWT
+const jwt = require('jsonwebtoken');
 // Importation du postDatamapper
 const { userDatamapper } = require('../datamappers');
 
@@ -80,6 +82,41 @@ const userController = {
     const newUser = await userDatamapper.addNewUser(userData, addressId);
     // Envoi du body en format JSON
     res.json(newUser);
+  },
+  // Méthode de login d'un utilisateur
+  async loginUser(req, res) {
+    // 1. Récupération des infos de connexion de puis le formulaire
+    const { pseudonym, password } = req.body;
+
+    // 2. Vérification de la présence de l'utilisateur en BDD
+    const userFound = await userDatamapper.checkUserPseudoExists(pseudonym);
+
+    // 3. Vérification de la validité du MdP
+    const validPassword = bcrypt.compareSync(password, userFound.password);
+    if (!userFound || !validPassword) {
+      res.json({
+        succes: false,
+        error: 'Ce pseudonym ou ce mot de passe est incorrect !',
+      });
+    }
+
+    // 4. Génération d'un token JWT
+    const newToken = jwt.sign(
+      {
+        id: userFound.id,
+        role: userFound.role_id,
+      },
+      '5sdza45gffzd47akbijfldj12djzjsdl554df5f5z5jfjfj4f5fz45fzjnzdkjdzf22z7zkjdfizchlkdfkj45zcjcznjfj',
+      {
+        expires: '1h',
+      },
+    );
+
+    // 5. Envoi de la réponse avec le token
+    res.json({
+      success: true,
+      token: newToken,
+    });
   },
   // Méthode de mise à jour des info d'un utilisateur
   async updateUser(req, res) {
