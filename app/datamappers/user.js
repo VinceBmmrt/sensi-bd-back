@@ -21,7 +21,33 @@ const userDatamapper = {
    * @returns retourne un utilisateur
    */
   async findById(id) {
-    const sqlQuery = 'SELECT * FROM "user" WHERE id = $1';
+    const sqlQuery = `
+    SELECT
+      "user"."id",
+      "user"."firstname",
+      "user"."lastname",
+      "user"."pseudonym",
+      "user"."email",
+      "user"."avatar",
+      "user"."score",
+      json_agg(
+        json_build_object(
+          'post_id', "post"."id",
+          'category_id', "post"."category_id",
+          'audience_id', "post"."audience_id",
+          'condition_id', "post"."condition_id",
+          'post_title', "post"."post_title",
+          'description', "post"."description",
+          'book_title', "post"."book_title",
+          'book_author', "post"."book_author",
+          'image', "post"."image",
+          'slug', "post"."slug"
+        )
+      ) AS posts
+    FROM "user"
+    LEFT JOIN "post" ON "post"."user_id" = "user"."id"
+    WHERE "user"."id" = $1
+    GROUP BY "user"."id";`;
     const values = [id];
     const results = await pool.query(sqlQuery, values);
     return results.rows;
