@@ -30,6 +30,14 @@ const userDatamapper = {
       "user"."email",
       "user"."avatar",
       "user"."score",
+      "address"."address",
+      "address"."number",
+      "address"."street",
+      "address"."zipcode",
+      "address"."city",
+      "address"."country",
+      "address"."latitude",
+      "address"."longitude",
       json_agg(
         json_build_object(
           'post_id', "post"."id",
@@ -46,8 +54,9 @@ const userDatamapper = {
       ) AS posts
     FROM "user"
     LEFT JOIN "post" ON "post"."user_id" = "user"."id"
+    LEFT JOIN "address" ON "user"."address_id" = "address"."id"
     WHERE "user"."id" = $1
-    GROUP BY "user"."id";`;
+    GROUP BY "user"."id", "address"."id", "address"."address", "address"."number", "address"."street", "address"."zipcode", "address"."city", "address"."country", "address"."latitude", "address"."longitude";`;
     const values = [id];
     const results = await pool.query(sqlQuery, values);
     return results.rows;
