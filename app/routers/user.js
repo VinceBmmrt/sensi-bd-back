@@ -16,7 +16,7 @@ const router = express.Router();
 
 // Définition des routes
 router.get('/', controllerHandler(userController.getAllUsers));
-router.get('/:id', controllerHandler(userController.getUserById));
+router.get('/:id', auth, controllerHandler(userController.getUserById));
 router.post('/', controllerHandler(userController.addUser));
 router.post('/login', controllerHandler(userController.loginUser));
 

@@ -109,6 +109,7 @@ const userController = {
     // 4. Envoi de la réponse avec le token
     return res.status(200).json({
       pseudo: userFound.pseudonym,
+      userId: userFound.id,
       isLogged: true,
       token: jwtUtils.generateTokenForUser(userFound),
     });
