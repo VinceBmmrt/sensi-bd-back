@@ -198,9 +198,9 @@ const userDatamapper = {
     }
     return false;
   },
-  async checkUserPseudoExists(pseudonym) {
-    const sqlQuery = 'SELECT * FROM "user" WHERE pseudonym = $1 LIMIT 1';
-    const values = [pseudonym];
+  async checkUserPseudoExists(email) {
+    const sqlQuery = 'SELECT * FROM "user" WHERE email = $1 LIMIT 1';
+    const values = [email];
     const results = await pool.query(sqlQuery, values);
     if (results.rows.length > 0) {
       return results.rows[0];
