@@ -92,3 +92,11 @@ GET http://localhost:5000/conditions/1
 ### Récupération d'un utilisateur et des annonces associées
 
 GET http://localhost:5000/users/4
+
+### Ajout d'un message lié à une annonce et à un utilisateur
+POST http://localhost:5000/messages/1/1
+Content-Type: application/json
+
+{
+    "message": "Bonjour, je suis intéressé par votre annonce"
+}

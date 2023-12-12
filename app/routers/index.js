@@ -6,6 +6,7 @@ const userRouter = require('./user');
 const categoryRouter = require('./category');
 const audienceRouter = require('./audience');
 const conditionRouter = require('./condition');
+const messageRouter = require('./message');
 
 // Création du router
 const router = express.Router();
@@ -16,6 +17,7 @@ router.use('/users', userRouter);
 router.use('/categories', categoryRouter);
 router.use('/audiences', audienceRouter);
 router.use('/conditions', conditionRouter);
+router.use('/messages', messageRouter);
 
 // Exportation du router
 module.exports = router;
