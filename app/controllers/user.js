@@ -103,7 +103,7 @@ const userController = {
     // 4. Génération d'un token JWT
     const newToken = jwt.sign(
       {
-        pseudonym: userFound.pseudonym,
+        pseudo: userFound.pseudonym,
         role: userFound.role_id,
         isLogged: true,
       },
