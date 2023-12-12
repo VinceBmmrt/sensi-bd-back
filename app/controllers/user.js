@@ -5,7 +5,7 @@ const validator = require('email-validator');
 // Importation de bcrypt pour le hachage de MdP
 const bcrypt = require('bcrypt');
 // Importation de JWT
-const jwt = require('jsonwebtoken');
+const jwtUtils = require('../utils/genToken');
 // Importation du postDatamapper
 const { userDatamapper } = require('../datamappers');
 
@@ -90,33 +90,27 @@ const userController = {
 
     // 2. Vérification de la présence de l'utilisateur en BDD
     const userFound = await userDatamapper.checkUserPseudoExists(email);
-
-    // 3. Vérification de la validité du MdP
-    const validPassword = bcrypt.compareSync(password, userFound.password);
-    if (!userFound || !validPassword) {
+    if (!userFound) {
       res.json({
         succes: false,
         error: 'Ce pseudonym ou ce mot de passe est incorrect !',
       });
     }
 
-    // 4. Génération d'un token JWT
-    const newToken = jwt.sign(
-      {
-        pseudo: userFound.pseudonym,
-        role: userFound.role_id,
-        isLogged: true,
-      },
-      '5sdza45gffzd47akbijfldj12djzjsdl554df5f5z5jfjfj4f5fz45fzjnzdkjdzf22z7zkjdfizchlkdfkj45zcjcznjfj',
-      {
-        expires: '1h',
-      },
-    );
+    // 3. Vérification de la validité du MdP
+    const validPassword = bcrypt.compareSync(password, userFound.password);
+    if (!validPassword) {
+      res.json({
+        succes: false,
+        error: 'Ce pseudonym ou ce mot de passe est incorrect !',
+      });
+    }
 
-    // 5. Envoi de la réponse avec le token
-    res.json({
-      success: true,
-      token: newToken,
+    // 4. Envoi de la réponse avec le token
+    return res.status(200).json({
+      pseudo: userFound.pseudonym,
+      isLogged: true,
+      token: jwtUtils.generateTokenForUser(userFound),
     });
   },
   // Méthode de mise à jour des info d'un utilisateur
