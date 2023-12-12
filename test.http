@@ -17,15 +17,16 @@ GET http://localhost:5000/posts/condition/1
 ### Ajout d'une annonce
 POST http://localhost:5000/posts
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJyb2xlIjoxLCJpYXQiOjE3MDIzOTg1ODgsImV4cCI6MTcwMjQwMjE4OH0.KuUqhXMLNfxnqoYSEeKXm40Joslb3OZ8xedsL60H3Dc
 
 {
-    "post_title": "Mon annonce",
-    "slug": "mon-annonce",
+    "post_title": "Mon annonce1",
+    "slug": "mon-annonce-1",
     "description": "Ma description",
     "image": "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
     "book_title": "Merlin l'enchanteur",
     "book_author": "Arthur",
-    "user_id": 1,
+    "user_id": 10,
     "category_id": 1,
     "audience_id": 1,
     "condition_id": 1
@@ -92,3 +93,18 @@ GET http://localhost:5000/conditions/1
 ### Récupération d'un utilisateur et des annonces associées
 
 GET http://localhost:5000/users/4
+
+
+
+### Connexion pour obtenir le Token JWT
+POST http://localhost:5000/users/login
+Content-Type: application/json
+
+{
+    "email": "lidkjdaqzdlk@gmail.com",
+    "password": "Azerty123!"
+}
+
+### Récupération d'un utilisateur et des annonces associées avec Token JWT
+GET http://localhost:5000/users/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJyb2xlIjoxLCJpYXQiOjE3MDIzOTQ0MzUsImV4cCI6MTcwMjM5ODAzNX0.lvIYFNurOCsl0ULnnom5utzO-OC6U_Z6_0e-VTjWIB4
