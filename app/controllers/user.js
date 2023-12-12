@@ -86,10 +86,10 @@ const userController = {
   // Méthode de login d'un utilisateur
   async loginUser(req, res) {
     // 1. Récupération des infos de connexion de puis le formulaire
-    const { pseudonym, password } = req.body;
+    const { email, password } = req.body;
 
     // 2. Vérification de la présence de l'utilisateur en BDD
-    const userFound = await userDatamapper.checkUserPseudoExists(pseudonym);
+    const userFound = await userDatamapper.checkUserPseudoExists(email);
 
     // 3. Vérification de la validité du MdP
     const validPassword = bcrypt.compareSync(password, userFound.password);
