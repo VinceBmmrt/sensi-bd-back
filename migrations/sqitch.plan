@@ -7,3 +7,4 @@
 04-change-name 2023-12-08T15:28:35Z Julien Serbielle <julien.serbielle@oclock.school> # changement du nomdu champ full_address de la table address
 05-pwd-length-var 2023-12-11T14:38:56Z Julien Serbielle <julien.serbielle@oclock.school> # Changement de la longueur du VAR pour le champ password de la table user
 06-default-score 2023-12-12T14:41:06Z Julien Serbielle <julien.serbielle@oclock.school> # Ajout du score par défaut à la table user
+07-add-column-in-message 2023-12-13T09:06:22Z Julien Serbielle <julien.serbielle@oclock.school> # Ajout de la colonne is_read à la table message
