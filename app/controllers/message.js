@@ -1,3 +1,5 @@
+// Importation du module debug
+const debug = require('debug')('sensibd:user-controller');
 // Importation du module messageController
 const { messageDatamapper } = require('../datamappers');
 
@@ -5,10 +7,11 @@ const { messageDatamapper } = require('../datamappers');
 const messageController = {
   // Méthode pour récupérer tous les messages liés à un post entre deux utilisateurs
   async getMessagesByPostAndUser(req, res) {
+    debug('User authentifié:', req.auth);
     // L'ID du destinataire est passé en paramètre dans l'URL
     const { postId, userId: receiverId } = req.params;
     // L'ID de l'expéditeur est récupéré depuis la session ou le token JWT
-    const senderId = req.user.id;
+    const senderId = req.auth.userId;
     // Appel de findAll pour obtenir tous les messages
     const messages = await messageDatamapper.findAll(postId, senderId, receiverId);
     // Envoi de la réponse au format JSON avec les messages

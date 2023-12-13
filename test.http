@@ -112,3 +112,8 @@ Content-Type: application/json
 {
     "message": "Bonjour, je suis intéressé par votre annonce"
 }
+
+### Récupération des messages d'une conversation
+
+GET http://localhost:5000/messages/5/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJyb2xlIjoxLCJpYXQiOjE3MDI0NjE5ODEsImV4cCI6MTcwMjQ2NTU4MX0.AdOKCozAg9jY0jfgZ2LuWUiLAeLPJ9hCfNta8tl5MHU
