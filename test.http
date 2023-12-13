@@ -69,15 +69,15 @@ Content-Type: application/json
     "city": "Paris",
     "confirmPassword": "Azerty123!",
     "country": "France",
-    "email": "mailpremier@gmail.com",
+    "email": "lidkjdaqzdlk@gmail.com",
     "error": false,
-    "firstname": "Alan",
-    "lastname": "Grant",
+    "firstname": "Elaa",
+    "lastname": "xilda",
     "latitude": 48.8698223,
     "longitude": 2.3550348,
     "number": "4",
     "password": "Azerty123!",
-    "pseudonym": "AlduJurassic",
+    "pseudonym": "lixadxci",
     "street": "Bd de Strasbourg",
     "zipcode": "75010"
 
@@ -116,8 +116,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJyb
 
 ### Récupération des messages d'une conversation
 GET http://localhost:5000/messages/5/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJyb2xlIjoxLCJpYXQiOjE3MDI0ODAzNTcsImV4cCI6MTcwMjQ4Mzk1N30.my7gqEW1ov68Rt-xbOeVP_lnyQK9o1NgC14U_HZuajI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJyb2xlIjoxLCJpYXQiOjE3MDI0NzEzMDAsImV4cCI6MTcwMjQ3NDkwMH0.7lIJWYv4SP2ydhGR6XxnvR2_KFM3Qbnx7HWYFmrhivQ
 
 ### Récupération des conversations d'un utilisateur (le dernier message de chaque conv)
 GET http://localhost:5000/messages/conversations
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJyb2xlIjoxLCJpYXQiOjE3MDI0ODAzNTcsImV4cCI6MTcwMjQ4Mzk1N30.my7gqEW1ov68Rt-xbOeVP_lnyQK9o1NgC14U_HZuajI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJyb2xlIjoxLCJpYXQiOjE3MDI0NzEzMDAsImV4cCI6MTcwMjQ3NDkwMH0.7lIJWYv4SP2ydhGR6XxnvR2_KFM3Qbnx7HWYFmrhivQ
