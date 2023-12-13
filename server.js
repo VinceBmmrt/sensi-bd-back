@@ -79,3 +79,5 @@ app.use(router);
 
 // Je lance l'écoute de mon serveur
 app.listen(PORT, () => debug(`Serveur démarré http://localhost:${PORT}`));
+debug('PGUSER:', process.env.PGUSER);
+debug('PGPASSWORD:', process.env.PGPASSWORD);

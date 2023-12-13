@@ -1,9 +1,17 @@
 // Importation du module debug
 const debug = require('debug')('sensibd:pool');
+// Importation de dotenv
+require('dotenv').config();
 // Importation du module pg
 const { Pool } = require('pg');
 // Création d'une instance de Pool
-const pool = new Pool();
+const pool = new Pool({
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
+});
 // Création d'une variable pour compter le nombre de requêtes
 let queryCount = 0;
 // Exportation d'un objet qui contient une propriété query qui est une fonction
