@@ -106,11 +106,12 @@ GET http://localhost:5000/users/4
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJyb2xlIjoxLCJpYXQiOjE3MDIzOTQ0MzUsImV4cCI6MTcwMjM5ODAzNX0.lvIYFNurOCsl0ULnnom5utzO-OC6U_Z6_0e-VTjWIB4
 
 ### Ajout d'un message lié à une annonce et à un utilisateur
-POST http://localhost:5000/messages/1/1
+POST http://localhost:5000/messages/5/1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJyb2xlIjoxLCJpYXQiOjE3MDI0NjQzNjEsImV4cCI6MTcwMjQ2Nzk2MX0.RU-6huG6Qp88LCWNmygRAiOMdio7j6a2RJ15f6tHJzc
 
 {
-    "message": "Bonjour, je suis intéressé par votre annonce"
+    "content": "Le mardi soir je suis dispo pour le don :D"
 }
 
 ### Récupération des messages d'une conversation

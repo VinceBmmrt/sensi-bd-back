@@ -19,10 +19,11 @@ const messageController = {
   },
   // Méthode pour créer un message
   async addMessage(req, res) {
+    debug('User authentifié:', req.auth);
     // L'ID du destinataire est passé en paramètre dans l'URL
     const { postId, userId: receiverId } = req.params;
     // L'ID de l'expéditeur est récupéré depuis la session ou le token JWT
-    const senderId = req.user.id;
+    const senderId = req.auth.userId;
     // Création d'un message
     const { content } = req.body;
     const message = await messageDatamapper.add(postId, senderId, receiverId, content);

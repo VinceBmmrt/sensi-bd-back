@@ -41,6 +41,14 @@ const messageDatamapper = {
     const results = await pool.query(sqlQuery, values);
     return results.rows;
   },
+  async add(postId, senderId, receiverId, content) {
+    const sqlQuery = `
+      INSERT INTO "message" ("content", "sender_id", "receiver_id", "post_id")
+      VALUES ($1, $2, $3, $4) RETURNING *`;
+    const values = [content, senderId, receiverId, postId];
+    const result = await pool.query(sqlQuery, values);
+    return result.rows[0];
+  },
 };
 
 module.exports = messageDatamapper;
