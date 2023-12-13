@@ -30,6 +30,15 @@ const messageController = {
     // Envoi de la réponse au format JSON avec le message
     res.json(message);
   },
+  async getConversations(req, res) {
+    debug('User authentifié:', req.auth);
+    // L'ID de l'utilisateur est récupéré depuis le token JWT
+    const { userId } = req.auth;
+    // Appel de getConversationsForUser pour obtenir toutes les conversations de l'utilisateur
+    const conversations = await messageDatamapper.getConversationsForUser(userId);
+    // Envoi de la réponse au format JSON avec les conversations
+    res.json(conversations);
+  },
 };
 
 // Exportation du controleur des messages

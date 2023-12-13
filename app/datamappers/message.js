@@ -49,6 +49,48 @@ const messageDatamapper = {
     const result = await pool.query(sqlQuery, values);
     return result.rows[0];
   },
+  async getConversationsForUser(userId) {
+    const sqlQuery = `
+    WITH RankedMessages AS (
+      SELECT
+          "message"."id",
+          "message"."post_id",
+          "message"."sender_id",
+          "message"."receiver_id",
+          "message"."created_at",
+          "user_sender"."pseudonym" AS "sender_pseudonym",
+          "user_receiver"."pseudonym" AS "receiver_pseudonym",
+          "post"."post_title",
+          ROW_NUMBER() OVER (
+              PARTITION BY "message"."post_id"
+              ORDER BY "message"."created_at" DESC
+          ) AS rn
+      FROM
+          "message"
+      INNER JOIN "user" AS "user_sender" ON "user_sender"."id" = "message"."sender_id"
+      INNER JOIN "user" AS "user_receiver" ON "user_receiver"."id" = "message"."receiver_id"
+      INNER JOIN "post" ON "post"."id" = "message"."post_id"
+      WHERE
+          "message"."sender_id" = $1 OR "message"."receiver_id" = $1
+    )
+    SELECT
+        "post_id",
+        "sender_id",
+        "receiver_id",
+        "sender_pseudonym",
+        "receiver_pseudonym",
+        "post_title",
+        "created_at" AS "last_message_time"
+    FROM
+        RankedMessages
+    WHERE
+        rn = 1
+    ORDER BY
+        "last_message_time" DESC;`;
+    const values = [userId];
+    const results = await pool.query(sqlQuery, values);
+    return results.rows;
+  },
 };
 
 module.exports = messageDatamapper;

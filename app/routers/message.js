@@ -16,6 +16,7 @@ const auth = require('../utils/authToken');
 // Définition des routes
 router.get('/:postId/:userId', auth, controllerHandler(messageController.getMessagesByPostAndUser));
 router.post('/:postId/:userId', auth, controllerHandler(messageController.addMessage));
+router.get('/conversations', auth, controllerHandler(messageController.getConversations));
 
 // Middleware pour gérer les routes qui ne correspondent à aucune route définie ci-dessus.
 router.use(() => {

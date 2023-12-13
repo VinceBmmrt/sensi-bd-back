@@ -108,13 +108,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJyb
 ### Ajout d'un message lié à une annonce et à un utilisateur
 POST http://localhost:5000/messages/5/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJyb2xlIjoxLCJpYXQiOjE3MDI0NjQzNjEsImV4cCI6MTcwMjQ2Nzk2MX0.RU-6huG6Qp88LCWNmygRAiOMdio7j6a2RJ15f6tHJzc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJyb2xlIjoxLCJpYXQiOjE3MDI0NzEzMDAsImV4cCI6MTcwMjQ3NDkwMH0.7lIJWYv4SP2ydhGR6XxnvR2_KFM3Qbnx7HWYFmrhivQ
 
 {
-    "content": "Le mardi soir je suis dispo pour le don :D"
+    "content": "Êtes-vous encore interessée ?"
 }
 
 ### Récupération des messages d'une conversation
-
 GET http://localhost:5000/messages/5/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJyb2xlIjoxLCJpYXQiOjE3MDI0NjE5ODEsImV4cCI6MTcwMjQ2NTU4MX0.AdOKCozAg9jY0jfgZ2LuWUiLAeLPJ9hCfNta8tl5MHU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJyb2xlIjoxLCJpYXQiOjE3MDI0NzUyODcsImV4cCI6MTcwMjQ3ODg4N30.VYnFdw7FpRhDaBOQ3s3WuWSdc3Nddb3UgIvABa8c07Y
+
+### Récupération des conversations d'un utilisateur (le dernier message de chaque conv)
+GET http://localhost:5000/messages/conversations
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJyb2xlIjoxLCJpYXQiOjE3MDI0NzUyODcsImV4cCI6MTcwMjQ3ODg4N30.VYnFdw7FpRhDaBOQ3s3WuWSdc3Nddb3UgIvABa8c07Y
