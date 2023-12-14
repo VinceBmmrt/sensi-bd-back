@@ -24,7 +24,7 @@ const postDatamapper = {
         "user"."avatar"
       FROM "post"
       JOIN "user" ON "user"."id" = "post"."user_id"
-      ORDER BY id ASC
+      ORDER BY id DESC
       LIMIT $1 OFFSET $2;
     `;
     const values = [pageSize, offset];
