@@ -33,16 +33,14 @@ const userController = {
     // 2. Vérification + hachage du MdP
     // - a. Vérification de la présence des infos
     if (!body.firstname || !body.lastname || !body.pseudonym || !body.email || !body.password) {
-      res.json({
-        success: false,
+      res.status(400).json({
         error: "Toutes les informations nécessaires n'ont pas été transmises.",
       });
     }
 
     // - b. Vérification du format de l'email
     if (!validator.validate(body.email)) {
-      res.json({
-        success: false,
+      res.status(400).json({
         error: "Cet email n'est pas valide.",
       });
     }
@@ -50,16 +48,14 @@ const userController = {
     // - c. Vérification de la présence de l'email en bdd
     const doesUserExist = await userDatamapper.checkUserExists(body.email);
     if (doesUserExist) {
-      res.json({
-        succes: false,
+      res.status(400).json({
         error: "Cet email n'est pas disponible.",
       });
     }
 
     // - d. Vérification si le mdp et sa confirmation sont identique
     if (body.password !== body.confirmPassword) {
-      res.json({
-        success: false,
+      res.status(400).json({
         error: 'Le mot de passe et la confirmation ne correspondent pas.',
       });
     }
@@ -91,8 +87,7 @@ const userController = {
     // 2. Vérification de la présence de l'utilisateur en BDD
     const userFound = await userDatamapper.checkUserPseudoExists(email);
     if (!userFound) {
-      res.json({
-        succes: false,
+      res.status(400).json({
         error: 'Ce pseudonym ou ce mot de passe est incorrect !',
       });
     }
@@ -100,8 +95,7 @@ const userController = {
     // 3. Vérification de la validité du MdP
     const validPassword = bcrypt.compareSync(password, userFound.password);
     if (!validPassword) {
-      res.json({
-        succes: false,
+      res.status(400).json({
         error: 'Ce pseudonym ou ce mot de passe est incorrect !',
       });
     }
