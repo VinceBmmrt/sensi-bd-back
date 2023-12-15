@@ -9,6 +9,7 @@ module.exports = {
       {
         userId: userData.id,
         role: userData.role_id,
+        score: userData.score,
       },
       JWT_SIGN_SECRET,
       {
