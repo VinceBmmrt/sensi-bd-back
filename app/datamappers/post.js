@@ -52,13 +52,30 @@ const postDatamapper = {
     return results.rows;
   },
   /**
-   * Méthode: récupérer un post par sa catégorie
+   * Méthode: récupérer un post par sa catégorie avec pagination
    * @param {number} id - id de la catégorie
    * @returns retourne un post
    */
-  async findByCategory(id) {
-    const sqlQuery = 'SELECT * FROM post WHERE category_id = $1';
-    const values = [id];
+  async findByCategory(id, page = 1) {
+    const pageSize = 10; // Nombre fixe de posts par page défini à 10
+    const pageNum = parseInt(page, 10);
+    const offset = (pageNum - 1) * pageSize; // Calcul du décalage basé sur la page demandée
+
+    const sqlQuery = `
+      SELECT
+        "post".*,
+        "user"."address_id",
+        "user"."firstname",
+        "user"."lastname",
+        "user"."pseudonym",
+        "user"."avatar"
+      FROM "post"
+      JOIN "user" ON "user"."id" = "post"."user_id"
+      WHERE "post"."category_id" = $1
+      ORDER BY id DESC
+      LIMIT $2 OFFSET $3;
+    `;
+    const values = [id, pageSize, offset];
     const results = await pool.query(sqlQuery, values);
     return results.rows;
   },
