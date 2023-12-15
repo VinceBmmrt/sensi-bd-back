@@ -53,7 +53,7 @@ const postDatamapper = {
     const results = await pool.query(sqlQuery, values);
     return results.rows;
   },
-  async findByKeyAndValue(value, page = 1) {
+  async findByCity(value, page = 1) {
     const pageSize = 10; // Nombre fixe de posts par page défini à 10
     const pageNum = parseInt(page, 10);
     const offset = (pageNum - 1) * pageSize; // Calcul du décalage basé sur la page demandée

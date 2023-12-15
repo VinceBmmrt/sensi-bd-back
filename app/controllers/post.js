@@ -23,7 +23,7 @@ const postController = {
     res.json(posts);
   },
   // Méthode: récupérer des post correspondant aux critères de recherche
-  async getPostByCriteria(req, res) {
+  async getPostByCity(req, res) {
     /* Récupération du numéro de page à partir des paramètres de requête,
     avec une valeur par défaut de 1 */
     const page = req.query.page || 1;
@@ -37,7 +37,7 @@ const postController = {
     debug('value:', value);
 
     // Appel du datamapper avec la clé, la valeur et le numero de page
-    const posts = await postDatamapper.findByKeyAndValue(value, page);
+    const posts = await postDatamapper.findByCity(value, page);
 
     res.json(posts);
   },
