@@ -22,7 +22,22 @@ const postController = {
     // Envoi de la réponse au format JSON
     res.json(posts);
   },
-  // Méthode: récupérer tous les posts par sa catégorie avec pagination
+  // Méthode: récupérer des post correspondant aux critères de recherche
+  async getPostByCriteria(req, res) {
+    /* Récupération du numéro de page à partir des paramètres de requête,
+    avec une valeur par défaut de 1 */
+    const page = req.query.page || 1;
+    const criteria = req.body;
+    // Extraction de la clé et de la valeur
+    const key = Object.keys(criteria)[0];
+    const value = criteria[key];
+
+    // Appel du datamapper avec la clé, la valeur et le numero de page
+    const posts = await postDatamapper.findByKeyAndValue(key, value, page);
+
+    res.json(posts);
+  },
+  // Méthode: récupérer un post par sa catégorie
   async getPostByCategory(req, res) {
     /* Récupération du numéro de page à partir des paramètres de requête,
     avec une valeur par défaut de 1 */
