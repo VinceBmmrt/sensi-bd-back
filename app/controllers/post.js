@@ -42,11 +42,14 @@ const postController = {
     // Envoi de la réponse au format JSON avec les posts
     res.json(posts);
   },
-  // Méthode: récupérer tous les posts par condition
+  // Méthode: récupérer tous les posts par condition avec pagination
   async getPostByCondition(req, res) {
-    // Récupération de l'id de la condition
-    const posts = await postDatamapper.findByCondition(req.params.id);
-    // Envoi de la réponse au format JSON
+    /* Récupération du numéro de page à partir des paramètres de requête,
+    avec une valeur par défaut de 1 */
+    const page = req.query.page || 1;
+    // Appel de findByCondition avec le numéro de page pour obtenir les posts paginés
+    const posts = await postDatamapper.findByCondition(req.params.id, page);
+    // Envoi de la réponse au format JSON avec les posts
     res.json(posts);
   },
   // Méthode: créer un post
