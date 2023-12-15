@@ -16,6 +16,7 @@ const auth = require('../utils/authToken');
 // Définition des routes
 router.get('/', controllerHandler(postController.getAllPosts));
 router.get('/:id', controllerHandler(postController.getPostById));
+router.get('/find', controllerHandler(postController.getPostByCriteria));
 router.get('/category/:id', controllerHandler(postController.getPostByCategory));
 router.get('/audience/:id', controllerHandler(postController.getPostByAudience));
 router.get('/condition/:id', controllerHandler(postController.getPostByCondition));
