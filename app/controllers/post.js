@@ -22,7 +22,7 @@ const postController = {
     // Envoi de la réponse au format JSON
     res.json(posts);
   },
-  // Méthode: récupérer un post par sa catégorie avec pagination
+  // Méthode: récupérer tous les posts par sa catégorie avec pagination
   async getPostByCategory(req, res) {
     /* Récupération du numéro de page à partir des paramètres de requête,
     avec une valeur par défaut de 1 */
@@ -31,16 +31,15 @@ const postController = {
     const posts = await postDatamapper.findByCategory(req.params.id, page);
     // Envoi de la réponse au format JSON avec les posts
     res.json(posts);
-    // Récupération de l'id de la catégorie
-    // const posts = await postDatamapper.findByCategory(req.params.id);
-    // // Envoi de la réponse au format JSON
-    // res.json(posts);
   },
-  // Méthode: récupérer tous les posts par audience
+  // Méthode: récupérer tous les posts par audience avec pagination
   async getPostByAudience(req, res) {
-    // Récupération de l'id de l'audience
-    const posts = await postDatamapper.findByAudience(req.params.id);
-    // Envoi de la réponse au format JSON
+    /* Récupération du numéro de page à partir des paramètres de requête,
+    avec une valeur par défaut de 1 */
+    const page = req.query.page || 1;
+    // Appel de findByAudience avec le numéro de page pour obtenir les posts paginés
+    const posts = await postDatamapper.findByAudience(req.params.id, page);
+    // Envoi de la réponse au format JSON avec les posts
     res.json(posts);
   },
   // Méthode: récupérer tous les posts par condition
