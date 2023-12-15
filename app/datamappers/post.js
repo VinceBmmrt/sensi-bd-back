@@ -23,9 +23,11 @@ const postDatamapper = {
         "user"."firstname",
         "user"."lastname",
         "user"."pseudonym",
-        "user"."avatar"
+        "user"."avatar",
+        "address"."city"
       FROM "post"
       JOIN "user" ON "user"."id" = "post"."user_id"
+      JOIN "address" ON "address"."id" = "user"."address_id"
       ORDER BY id DESC
       LIMIT $1 OFFSET $2;
     `;
@@ -45,9 +47,11 @@ const postDatamapper = {
                         "user"."firstname",
                         "user"."lastname",
                         "user"."pseudonym",
-                        "user"."avatar"
+                        "user"."avatar",
+                        "address"."city"
                       FROM "post"
                       JOIN "user" ON "user"."id" = "post"."user_id"
+                      JOIN "address" ON "address"."id" = "user"."address_id"
                       WHERE "post"."id" = $1`;
     const values = [id];
     const results = await pool.query(sqlQuery, values);
@@ -70,7 +74,8 @@ const postDatamapper = {
         "user"."firstname",
         "user"."lastname",
         "user"."pseudonym",
-        "user"."avatar"
+        "user"."avatar",
+        "address"."city"
       FROM "post"
       JOIN "user" ON "user"."id" = "post"."user_id"
       JOIN "address" ON "address"."id" = "user"."address_id"
