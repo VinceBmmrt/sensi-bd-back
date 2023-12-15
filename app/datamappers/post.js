@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-unused-vars
+const debug = require('debug')('sensibd:post-datamapper');
 // Importe l'instance du pool de connexions à la base de données depuis le fichier 'pool.js' local.
 // Ce pool est utilisé pour gérer et optimiser les connexions à la base de données,
 // facilitant les requêtes et les transactions dans le DataMapper.
@@ -48,6 +50,35 @@ const postDatamapper = {
                       JOIN "user" ON "user"."id" = "post"."user_id"
                       WHERE "post"."id" = $1`;
     const values = [id];
+    const results = await pool.query(sqlQuery, values);
+    return results.rows;
+  },
+  async findByCity(value, page = 1) {
+    const pageSize = 10; // Nombre fixe de posts par page défini à 10
+    const pageNum = parseInt(page, 10);
+    const offset = (pageNum - 1) * pageSize; // Calcul du décalage basé sur la page demandée
+
+    debug('key:', page);
+    debug('value:', value);
+    debug('pageSize:', pageSize);
+    debug('offset:', offset);
+
+    const sqlQuery = `
+      SELECT
+        "post".*,
+        "user"."address_id",
+        "user"."firstname",
+        "user"."lastname",
+        "user"."pseudonym",
+        "user"."avatar"
+      FROM "post"
+      JOIN "user" ON "user"."id" = "post"."user_id"
+      JOIN "address" ON "address"."id" = "user"."address_id"
+      WHERE "address"."city" = $1
+      ORDER BY "post".id DESC
+      LIMIT $2 OFFSET $3;
+    `;
+    const values = [value, pageSize, offset];
     const results = await pool.query(sqlQuery, values);
     return results.rows;
   },
