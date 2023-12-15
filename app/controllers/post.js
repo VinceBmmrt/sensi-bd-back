@@ -1,7 +1,7 @@
+// Importation du module debug
+const debug = require('debug')('sensibd:post-controller');
 // Importation du postDatamapper
 const { postDatamapper } = require('../datamappers');
-// Importation du module debug
-// const debug = require('debug')('controller:post');
 
 // Objet: regroupe tous les controleurs des posts
 const postController = {
@@ -27,13 +27,17 @@ const postController = {
     /* Récupération du numéro de page à partir des paramètres de requête,
     avec une valeur par défaut de 1 */
     const page = req.query.page || 1;
-    const criteria = req.body;
+    const criteria = req.query;
     // Extraction de la clé et de la valeur
-    const key = Object.keys(criteria)[0];
+    const [key] = Object.keys(criteria);
     const value = criteria[key];
 
+    debug('page:', page);
+    debug('criteria:', criteria);
+    debug('value:', value);
+
     // Appel du datamapper avec la clé, la valeur et le numero de page
-    const posts = await postDatamapper.findByKeyAndValue(key, value, page);
+    const posts = await postDatamapper.findByKeyAndValue(value, page);
 
     res.json(posts);
   },

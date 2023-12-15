@@ -121,3 +121,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJyb
 ### Récupération des conversations d'un utilisateur (le dernier message de chaque conv)
 GET http://localhost:5000/messages/conversations
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJyb2xlIjoxLCJpYXQiOjE3MDI0NzEzMDAsImV4cCI6MTcwMjQ3NDkwMH0.7lIJWYv4SP2ydhGR6XxnvR2_KFM3Qbnx7HWYFmrhivQ
+
+### Récupération de toutes les annonces avec des critères
+GET http://localhost:5000/posts/find?micheline=Bordeaux
