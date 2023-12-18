@@ -8,12 +8,13 @@ const pool = require('./pool');
 // Initialisation à la connexion à la base de données
 const postDatamapper = {
   /**
-   * Méthode: récupérer tous les posts de la base de données
-   * @returns retourne tout les posts
+   * Méthode: récupérer toutes les annonces de la base de données
+   * @returns retourne toutes les annonces
+   * @param {number} page - numéro de la page
    */
   async findAll(page = 1) {
-    const pageSize = 10; // Nombre fixe de posts par page défini à 10
-    const pageNum = parseInt(page, 10);
+    const pageSize = 10; // Nombre fixe d'annonces par page défini à 10
+    const pageNum = parseInt(page, 10); // Conversion de la page en nombre entier
     const offset = (pageNum - 1) * pageSize; // Calcul du décalage basé sur la page demandée
 
     const sqlQuery = `
@@ -36,9 +37,9 @@ const postDatamapper = {
     return results.rows;
   },
   /**
-   * Méthode: récupérer un post par son id
-   * @param {number} id - id du post
-   * @returns retourne un post
+   * Méthode: récupérer une annonce par son id
+   * @param {number} id - id de l'annonce
+   * @returns retourne une annonce par son id
    */
   async findById(id) {
     const sqlQuery = `SELECT
@@ -57,9 +58,15 @@ const postDatamapper = {
     const results = await pool.query(sqlQuery, values);
     return results.rows;
   },
+  /**
+   * Méthode: récupérer une annonce par sa ville avec pagination
+   * @param {string} value - valeur de la ville
+   * @param {number} page - numéro de la page
+   * @returns retourne une annonce par sa ville
+  */
   async findByCity(value, page = 1) {
     const pageSize = 10; // Nombre fixe de posts par page défini à 10
-    const pageNum = parseInt(page, 10);
+    const pageNum = parseInt(page, 10); // Conversion de la page en nombre entier
     const offset = (pageNum - 1) * pageSize; // Calcul du décalage basé sur la page demandée
 
     debug('key:', page);
@@ -88,13 +95,14 @@ const postDatamapper = {
     return results.rows;
   },
   /**
-   * Méthode: récupérer un post par sa catégorie avec pagination
+   * Méthode: récupérer une annonce par sa catégorie avec pagination
    * @param {number} id - id de la catégorie
-   * @returns retourne un post
+   * @param {number} page - numéro de la page
+   * @returns retourne une annonce par sa catégorie
    */
   async findByCategory(id, page = 1) {
-    const pageSize = 10; // Nombre fixe de posts par page défini à 10
-    const pageNum = parseInt(page, 10);
+    const pageSize = 10; // Nombre fixe d'annonces par page défini à 10
+    const pageNum = parseInt(page, 10); // Conversion de la page en nombre entier
     const offset = (pageNum - 1) * pageSize; // Calcul du décalage basé sur la page demandée
 
     const sqlQuery = `
@@ -116,13 +124,14 @@ const postDatamapper = {
     return results.rows;
   },
   /**
-   * Méthode: récupérer tous les posts par audience avec pagination
+   * Méthode: récupérer tous les annonces par audience avec pagination
    * @param {number} id - id de l'audience
-   * @returns retourne tous les posts
+   * @param {number} page - numéro de la page
+   * @returns retourne tous les posts par audience
    */
   async findByAudience(id, page = 1) {
-    const pageSize = 10; // Nombre fixe de posts par page défini à 10
-    const pageNum = parseInt(page, 10);
+    const pageSize = 10; // Nombre fixe d'annonces par page défini à 10
+    const pageNum = parseInt(page, 10); // Conversion de la page en nombre entier
     const offset = (pageNum - 1) * pageSize; // Calcul du décalage basé sur la page demandée
 
     const sqlQuery = `
@@ -144,13 +153,14 @@ const postDatamapper = {
     return results.rows;
   },
   /**
-   * Méthode: récupérer tous les posts par condition avec pagination
-   * @param {number} id - id de la condition
-   * @returns retourne tous les posts
+   * Méthode: récupérer toutes les annonces par l'état de l'ouvrage avec pagination
+   * @param {number} id - id de l'état de l'ouvrage
+   * @param {number} page - numéro de la page
+   * @returns retourne tous les posts par l'état de l'ouvrage
    */
   async findByCondition(id, page = 1) {
     const pageSize = 10; // Nombre fixe de posts par page défini à 10
-    const pageNum = parseInt(page, 10);
+    const pageNum = parseInt(page, 10); // Conversion de la page en nombre entier
     const offset = (pageNum - 1) * pageSize; // Calcul du décalage basé sur la page demandée
 
     const sqlQuery = `
@@ -172,9 +182,9 @@ const postDatamapper = {
     return results.rows;
   },
   /**
-   * Méthode: créer un post
-   * @param {object} post - post à créer
-   * @returns retourne un post
+   * Méthode: créer une annonce
+   * @param {object} post - annonce à créer
+   * @returns retourne une annonce créée
    */
   async add(post) {
     const sqlQuery = `
@@ -198,10 +208,10 @@ const postDatamapper = {
     return results.rows[0];
   },
   /**
-   * Méthode: modifier un post selon son id
-   * @param {number} id - id du post
-   * @param {object} post - post à modifier
-   * @returns retourne un post
+   * Méthode: modifier une annonce selon son id
+   * @param {number} id - id de l'annonce
+   * @param {object} post - annonce à modifier
+   * @returns retourne une annonce modifiée
    */
   async update(id, post) {
     const sqlQuery = `
@@ -236,8 +246,9 @@ const postDatamapper = {
     return results.rows[0];
   },
   /**
-   * Méthode: supprimer un post selon son id
-   * @param {number} id - id du post
+   * Méthode: supprimer une annonce selon son id
+   * @param {number} id - id de l'annonce
+   * @returns retourne une annonce supprimée
    */
   async delete(id) {
     const sqlQuery = 'DELETE FROM post WHERE id = $1;';
