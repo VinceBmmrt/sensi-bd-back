@@ -9,7 +9,10 @@ const pool = require('./pool');
 const messageDatamapper = {
   /**
    * Méthode: récupérer tous les messages liés à un post entre deux utilisateurs
-   * @returns retourne tout les messages
+   * @param {number} postId id de l'annonce
+   * @param {number} senderId id du destinateur du message
+   * @param {number} receiverId id du destinataire du message
+   * @returns retourne tout les messages de la conversation
    */
   async findAll(postId, senderId, receiverId) {
     const sqlQuery = `
@@ -41,6 +44,14 @@ const messageDatamapper = {
     const results = await pool.query(sqlQuery, values);
     return results.rows;
   },
+  /**
+   * Méthode pour poster un message à un autre utilisateur
+   * @param {number} postId id de l'annonce
+   * @param {number} senderId id du destinateur du message
+   * @param {number} receiverId id du destinataire du message
+   * @param {string} content contenu du message à envoyer
+   * @returns retourne le message envoyé
+   */
   async add(postId, senderId, receiverId, content) {
     const sqlQuery = `
       INSERT INTO "message" ("content", "sender_id", "receiver_id", "post_id")
@@ -49,6 +60,11 @@ const messageDatamapper = {
     const result = await pool.query(sqlQuery, values);
     return result.rows[0];
   },
+  /**
+   * Méthode pour récupérer une liste de toutes les conversations d'un utilisateur
+   * @param {number} userId id de l'utilisateur authentifié
+   * @returns retourne la liste des derniers messages de chaque conversations
+   */
   async getConversationsForUser(userId) {
     const sqlQuery = `
     WITH RankedMessages AS (
