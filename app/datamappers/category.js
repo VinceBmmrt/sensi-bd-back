@@ -17,7 +17,7 @@ const categoryDatamapper = {
   /**
    * Méthode: récupérer une catégorie de la BDD par son ID
    * @param {number} id id de la catégorie
-   * @returns retourne une catégorie
+   * @returns retourne une catégorie par son id
    */
   async findById(id) {
     const sqlQuery = 'SELECT * FROM "category" WHERE id = $1';
