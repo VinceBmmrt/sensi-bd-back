@@ -14,6 +14,12 @@ const router = express.Router();
 const auth = require('../utils/authToken');
 
 // Définition des routes
+/**
+ * GET /posts
+ * @summary retourne une liste d'annonce
+ * @param {number} req.query.page - le numero de la page
+ * @return {object} 200 - Success response
+ */
 router.get('/', controllerHandler(postController.getAllPosts));
 router.get('/find', controllerHandler(postController.getPostByCity));
 router.get('/:id', controllerHandler(postController.getPostById));
