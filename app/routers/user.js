@@ -58,7 +58,6 @@ router.post('/', controllerHandler(userController.addUser));
  * @property {string} email - email de l'utilisateur
  * @property {string} password - mot de passe de l'utilisateur
  * @return {object} 200 - Success response
- * @return {string} token - Token JWT pour l'authentification
  */
 router.post('/login', controllerHandler(userController.loginUser));
 
@@ -97,7 +96,7 @@ router.delete('/:id', auth, controllerHandler(userController.deleteUser));
  * @property {string} country - nom du pays
  * @property {number} latitude - la latitude de l'adresse
  * @property {number} longitude - la longitude de l'adresse
- * @return {object} 200 -Success response
+ * @return {object} 200 - Success response
  */
 router.patch('/:id/address', auth, controllerHandler(userController.updateUserAddress));
 
