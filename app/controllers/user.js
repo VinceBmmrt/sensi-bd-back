@@ -110,18 +110,18 @@ const userController = {
   },
   // Méthode de mise à jour des info d'un utilisateur
   async updateUser(req, res) {
-    const user = await userDatamapper.update(req.params.id, req.body);
+    const user = await userDatamapper.update(req.auth.userId, req.body);
     res.json(user);
   },
   // Méthode de suppression d'un utilisateur
   async deleteUser(req, res) {
-    const user = await userDatamapper.delete(req.params.id);
+    const user = await userDatamapper.delete(req.auth.userId);
     res.json(user);
   },
   // Méthode de mise à jour des info de l'adresse d'un utilisateur
   async updateUserAddress(req, res) {
     debug('req.body:', req.body);
-    const userAddressId = await userDatamapper.findAddressId(req.params.id);
+    const userAddressId = await userDatamapper.findAddressId(req.auth.userId);
     debug('User Address ID:', userAddressId);
     const newUserAddress = await userDatamapper.updateAddress(userAddressId, req.body);
     res.json(newUserAddress);
