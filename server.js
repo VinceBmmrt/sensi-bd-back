@@ -24,6 +24,8 @@ const multer = require('multer');
 /* Création d'une instance multer, configurée pour stocker
 les fichiers téléchargés dans le dossier 'uploads/' */
 const upload = multer({ dest: 'uploads/' });
+// Importation de Express-JSDOC-swagger pour la documentation
+const expressJSDocSwagger = require('express-jsdoc-swagger');
 // Importation des modules pour la gestion des fichiers sur S3
 const { uploadFile, getFileStream } = require('./s3');
 // Importation du router
@@ -32,8 +34,30 @@ const router = require('./app/routers');
 // Définition du port d'écoute du serveur
 const PORT = process.env.PORT ?? 5000;
 
+// Configuration de express-jsdoc-swagger
+const options = {
+  info: {
+    version: '1.0.0',
+    title: 'Sensi-BD-API',
+    license: {
+      name: 'MIT',
+    },
+  },
+  // Base directory which we use to locate your JSDOC files
+  baseDir: `${__dirname}/app/routers`,
+  // Glob pattern to find your jsdoc files (multiple patterns can be added in an array)
+  filesPattern: './**/*.js',
+  // URL where SwaggerUI will be rendered
+  swaggerUIPath: '/api-docs',
+  // Expose OpenAPI UI
+  exposeSwaggerUI: true,
+};
+
 // Création de l'application express
 const app = express();
+
+// Appel de express-jsdoc-swagger
+expressJSDocSwagger(app)(options);
 
 // Autorise la réception de données au format (Content-type) JSON
 app.use(express.json());
