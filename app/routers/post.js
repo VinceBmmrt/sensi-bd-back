@@ -73,10 +73,10 @@ router.get('/condition/:id', controllerHandler(postController.getPostByCondition
  * @property {string} image - image de l'annonce
  * @property {string} book_title - titre du l'oeuvre de l'annonce
  * @property {string} book_author - nom de l'auteur de l'oeuvre de l'annonce
- * @property {string} user_id - id de l'utilisateur qui poste l'annonce
- * @property {string} category_id - id de la catégorie de l'annonce
- * @property {string} audience_id - id de l'audience cible de l'annonce
- * @property {string} condition_id - id de l'état d'usur de l'oeuvre de l'annonce
+ * @property {number} user_id - id de l'utilisateur qui poste l'annonce
+ * @property {number} category_id - id de la catégorie de l'annonce
+ * @property {number} audience_id - id de l'audience cible de l'annonce
+ * @property {number} condition_id - id de l'état d'usur de l'oeuvre de l'annonce
  * @return {object} 200 - Success response
  */
 router.post('/', auth, controllerHandler(postController.addPost));
@@ -92,10 +92,10 @@ router.post('/', auth, controllerHandler(postController.addPost));
  * @property {string} image - image de l'annonce
  * @property {string} book_title - titre du l'oeuvre de l'annonce
  * @property {string} book_author - nom de l'auteur de l'oeuvre de l'annonce
- * @property {string} user_id - id de l'utilisateur qui poste l'annonce
- * @property {string} category_id - id de la catégorie de l'annonce
- * @property {string} audience_id - id de l'audience cible de l'annonce
- * @property {string} condition_id - id de l'état d'usur de l'oeuvre de l'annonce
+ * @property {number} user_id - id de l'utilisateur qui poste l'annonce
+ * @property {number} category_id - id de la catégorie de l'annonce
+ * @property {number} audience_id - id de l'audience cible de l'annonce
+ * @property {number} condition_id - id de l'état d'usur de l'oeuvre de l'annonce
  * @return {object} 200 - Success response
  */
 router.put('/:id', auth, controllerHandler(postController.updatePost));
