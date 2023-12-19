@@ -16,11 +16,18 @@ const auth = require('../utils/authToken');
 // Définition des routes
 /**
  * GET /posts
- * @summary retourne une liste d'annonce
- * @param {number} req.query.page - le numero de la page
+ * @summary retourne une liste d'annonces
+ * @param {number} page.query - le numero de la page
  * @return {object} 200 - Success response
  */
 router.get('/', controllerHandler(postController.getAllPosts));
+/**
+ * GET /posts/find
+ * @summary retourne une liste d'annonces trié par ville du propriétaire de l'annonce
+ * @param {string} city.query.required - le nom de la ville des annonces
+ * @param {number} page.query - le numero de la page
+ * @return {object} 200 - Success response
+ */
 router.get('/find', controllerHandler(postController.getPostByCity));
 router.get('/:id', controllerHandler(postController.getPostById));
 router.get('/category/:id', controllerHandler(postController.getPostByCategory));
