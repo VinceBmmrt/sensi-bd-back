@@ -4,7 +4,7 @@ const { uploadFileToS3, getFileStreamFromS3, unlinkFile } = require('../utils/s3
 const uploadFile = async (req, res) => {
   const result = await uploadFileToS3(req.file);
   await unlinkFile(req.file.path);
-  res.send({ imagePath: result.Location });
+  res.send({ imagePath: result });
 };
 
 const getFile = (req, res) => {
