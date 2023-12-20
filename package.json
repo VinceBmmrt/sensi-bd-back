@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "dev": "DEBUG=sensibd:* NODE_ENV=development npx nodemon"
+    "dev": "DEBUG=sensibd:* NODE_ENV=development npx nodemon",
+    "start": "npx nodemon"
   },
   "keywords": [],
   "author": "",

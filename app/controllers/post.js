@@ -3,7 +3,7 @@ const debug = require('debug')('sensibd:post-controller');
 // Importation du postDatamapper
 const { postDatamapper } = require('../datamappers');
 
-const s3Service = require('../utils/s3Service');
+// const s3Service = require('../utils/s3Service');
 
 // Objet: regroupe tous les controleurs des posts
 const postController = {
@@ -73,24 +73,17 @@ const postController = {
     // Envoi de la réponse au format JSON avec les posts
     res.json(posts);
   },
-  // // Méthode: créer un post
-  // async addPost(req, res) {
-  //   // Création d'un post
-  //   const post = await postDatamapper.add(req.body);
-  //   // Envoi de la réponse au format JSON
-  //   res.json(post);
-  // },
   // Méthode: créer un post avec upload d'image
   async addPost(req, res) {
     try {
-      // ... logique pour gérer l'upload de fichier
-      const { file } = req; // Le fichier uploadé
-      const signedUrl = await s3Service.uploadFileToS3(file);
+      // // ... logique pour gérer l'upload de fichier
+      // const { file } = req; // Le fichier uploadé
+      // const signedUrl = await s3Service.uploadFileToS3(file);
 
       // Créer l'objet post avec l'URL présignée
       const post = {
         ...req.body, // Autres propriétés du post
-        image: signedUrl, // Utiliser l'URL présignée pour la propriété 'image'
+        // image: signedUrl, // Utiliser l'URL présignée pour la propriété 'image'
       };
 
       // Appeler la méthode add du postDatamapper
@@ -101,30 +94,6 @@ const postController = {
       res.status(500).send(error.message);
     }
   },
-  // // Méthode: créer un post avec upload d'image
-  // async addPostWithImage(req, res) {
-  //   try {
-  //     // Assurez-vous que vous recevez un fichier dans la requête (req.file)
-  //     // et que les autres données du post sont dans req.body
-  //     const { file } = req;
-  //     const postData = req.body;
-
-  //     // Envoi du fichier à S3 et récupération du lien présigné
-  //     const presignedUrl = await s3Service.uploadFileToS3(file);
-
-  //     // Ajout du lien présigné à l'objet post
-  //     postData.image = presignedUrl; // Remplacez 'image' par le nom de la clé appropriée
-
-  //     // Création du post avec le lien présigné
-  //     const newPost = await postDatamapper.add(postData);
-
-  //     // Envoi de la réponse au format JSON avec le nouveau post
-  //     res.status(201).json(newPost);
-  //   } catch (error) {
-  //     console.error('Erreur lors de la création du post avec fichier:', error);
-  //     res.status(500).json({ error: 'Erreur interne du serveur' });
-  //   }
-  // },
   // Méthode: modifier un post selon son id
   async updatePost(req, res) {
     // Modification d'un post
