@@ -99,13 +99,6 @@ router.post('/', auth, controllerHandler(postController.addPost));
  * @return {object} 200 - Success response
  */
 router.put('/:id', auth, controllerHandler(postController.updatePost));
-
-/**
- * DELETE /posts/{id}
- * @summary suppression d'une annonce par un utilisateur authentifié
- * @param {number} id.path.required - l'id de l'annonce
- * @return {object} 200 - Success response
- */
 router.delete('/:id', auth, controllerHandler(postController.deletePost));
 
 // Middleware pour gérer les routes qui ne correspondent à aucune route définie ci-dessus.
