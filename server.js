@@ -11,23 +11,8 @@ const debug = require('debug')('sensibd:server');
 // const path = require('path');
 // Importation du module express
 const express = require('express');
-
-const f3 = require('fs');
-const util = require('util');
-
-const unlinkFile = util.promisify(f3.unlink);
-
-/* Importation du module multer pour la gestion
-des fichiers entrants dans les requêtes HTTP */
-// eslint-disable-next-line import/no-extraneous-dependencies
-const multer = require('multer');
-/* Création d'une instance multer, configurée pour stocker
-les fichiers téléchargés dans le dossier 'uploads/' */
-const upload = multer({ dest: 'uploads/' });
 // Importation de Express-JSDOC-swagger pour la documentation
 const expressJSDocSwagger = require('express-jsdoc-swagger');
-// Importation des modules pour la gestion des fichiers sur S3
-const { uploadFile, getFileStream } = require('./s3');
 // Importation du router
 const router = require('./app/routers');
 
