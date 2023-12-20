@@ -80,6 +80,7 @@ router.get('/condition/:id', controllerHandler(postController.getPostByCondition
  * @return {object} 200 - Success response
  */
 router.post('/', auth, controllerHandler(postController.addPost));
+<<<<<<< HEAD
 
 /**
  * PUT /posts/{id}
@@ -98,6 +99,9 @@ router.post('/', auth, controllerHandler(postController.addPost));
  * @property {number} condition_id - id de l'état d'usur de l'oeuvre de l'annonce
  * @return {object} 200 - Success response
  */
+=======
+// router.post('/', auth, controllerHandler(postController.addPostWithImage));
+>>>>>>> 1cf6981 (feat: upload d'images via S3)
 router.put('/:id', auth, controllerHandler(postController.updatePost));
 
 /**
