@@ -43,10 +43,19 @@ router.get('/:postId/:userId', auth, controllerHandler(messageController.getMess
 router.post('/:postId/:userId', auth, controllerHandler(messageController.addMessage));
 
 /**
+ * Conversation types
+ * @typedef {object} Conversation
+ * @property {number} id - id de la conversation
+ * @property {string} content - contenu du message
+ * @property {number} post_id - id de l'annonce
+ * @property {number} user_id - id de l'utilisateur
+ */
+
+/**
  * GET /messages/conversations
  * @summary retourne toutes les conversations d'un utilisateur
  * @security JWT
- * @return {conversation} 200 - Liste des conversations de l'utilisateur authentifié
+ * @return {Conversation} 200 - Liste des conversations de l'utilisateur authentifié
  */
 router.get('/conversations', auth, controllerHandler(messageController.getConversations));
 
